@@ -1,0 +1,10 @@
+# Base dependencies
+
+# Sync with readthedocs:
+# https://github.com/readthedocs/readthedocs.org/blob/master/requirements/pip.txt
+# https://github.com/readthedocs/readthedocs.org/blob/master/requirements/local-docs-build.txt
+sphinx
+sphinx_rtd_theme
+
+# Full-page search UI for RTD: https://readthedocs-sphinx-search.readthedocs.io
+readthedocs-sphinx-search==0.1.0rc3

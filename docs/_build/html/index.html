@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Welcome to Bittensor’s documentation! &mdash; Bittensor 1 documentation</title>
+  <title>Bittensor Documentation &mdash; Bittensor 1 documentation</title>
   
 
   
@@ -82,8 +82,11 @@
             
               <!-- Local TOC -->
               <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">Welcome to Bittensor’s documentation!</a></li>
-<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+<li><a class="reference internal" href="#">Bittensor Documentation</a></li>
+<li><a class="reference internal" href="#getting-started">Getting Started</a><ul>
+<li><a class="reference internal" href="#start-bittensor-via-docker">Start Bittensor via docker</a></li>
+</ul>
+</li>
 </ul>
 </div>
             
@@ -130,7 +133,7 @@
     
       <li><a href="#" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Welcome to Bittensor’s documentation!</li>
+      <li>Bittensor Documentation</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -151,18 +154,54 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="welcome-to-bittensor-s-documentation">
-<h1>Welcome to Bittensor’s documentation!<a class="headerlink" href="#welcome-to-bittensor-s-documentation" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="bittensor-documentation">
+<h1>Bittensor Documentation<a class="headerlink" href="#bittensor-documentation" title="Permalink to this headline">¶</a></h1>
+<p>Welcome to the official documentation of Bittensor, the peer-to-peer machine intelligence framework.</p>
 <div class="toctree-wrapper compound">
 </div>
 </div>
-<div class="section" id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
-<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
-<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
-</ul>
+<div class="section" id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<p>There are two ways to start BitTensor: via a native Python command, or via a dockerized instance. Typically, the dockerized instance is recommended
+when training a full model to completion, whereas the Python command is best for debugging purposes.</p>
+<div class="section" id="start-bittensor-via-docker">
+<h2>Start Bittensor via docker<a class="headerlink" href="#start-bittensor-via-docker" title="Permalink to this headline">¶</a></h2>
+<p>Bittensor has a bash script that automatically pulls the latest image from Docker Hub
+and constructs a docker container that is able to run a given model.</p>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>./start_bittensor.sh
+</pre></div>
+</div>
+<p>By default, the script will run the MNIST example network under <code class="code docutils literal notranslate"><span class="pre">examples/mnist</span></code> on <code class="code docutils literal notranslate"><span class="pre">localhost</span></code>.
+However, it is possible to specify the parameters of the run using the following flags:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="77%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Flag</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">n,</span> <span class="pre">--neuron</span></code></td>
+<td>Which model (also called a neuron) to run. E.g. MNIST, CIFAR, etc.</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">-l,</span> <span class="pre">--logdir</span></code></td>
+<td>Logging directory</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">-p,</span> <span class="pre">--port</span></code></td>
+<td>Bind side port for accepting requests.</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">-r,</span> <span class="pre">--remote</span></code></td>
+<td>Run instance locally or remotely</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">-t,</span> <span class="pre">--token</span></code></td>
+<td>Digital ocean API token</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 
 
