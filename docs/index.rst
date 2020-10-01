@@ -37,7 +37,5 @@ However, it is possible to specify the parameters of the run using the following
 :code:`n, --neuron`     Which model (also called a neuron) to run. E.g. MNIST, CIFAR, etc.
 :code:`-l, --logdir`    Logging directory
 :code:`-p, --port`      Bind side port for accepting requests.
-:code:`-r, --remote`    Run instance locally or remotely
-:code:`-t, --token`     Digital ocean API token
 ====================   ====================================================================
 
