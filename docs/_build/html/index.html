@@ -85,6 +85,7 @@
 <li><a class="reference internal" href="#">Bittensor Documentation</a></li>
 <li><a class="reference internal" href="#getting-started">Getting Started</a><ul>
 <li><a class="reference internal" href="#start-bittensor-via-docker">Start Bittensor via docker</a></li>
+<li><a class="reference internal" href="#start-bittensor-via-native-python-on-a-single-machine">Start Bittensor via native Python on a single machine</a></li>
 </ul>
 </li>
 </ul>
@@ -193,14 +194,65 @@ However, it is possible to specify the parameters of the run using the following
 <tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">-p,</span> <span class="pre">--port</span></code></td>
 <td>Bind side port for accepting requests.</td>
 </tr>
-<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">-r,</span> <span class="pre">--remote</span></code></td>
-<td>Run instance locally or remotely</td>
+</tbody>
+</table>
+</div>
+<div class="section" id="start-bittensor-via-native-python-on-a-single-machine">
+<h2>Start Bittensor via native Python on a single machine<a class="headerlink" href="#start-bittensor-via-native-python-on-a-single-machine" title="Permalink to this headline">¶</a></h2>
+<p>First, ensure that you have <code class="code docutils literal notranslate"><span class="pre">Python</span> <span class="pre">3.5</span></code> or above to run Bittensor. Once you have done so, you can move to the
+<code class="code docutils literal notranslate"><span class="pre">examples</span></code> directory and pick a model to run. You can run the model directly by calling:</p>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>python main.py
+</pre></div>
+</div>
+<p>This will run a single instance of the model that will not speak to any peers with default parameters. The parameters for
+running a bittensor model are as follows:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="27%" />
+<col width="73%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Flag</th>
+<th class="head">Description</th>
 </tr>
-<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">-t,</span> <span class="pre">--token</span></code></td>
-<td>Digital ocean API token</td>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">--chain_endpoint</span></code></td>
+<td>Bittensor chain endpoint.</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">--axon_port</span></code></td>
+<td>Axon terminal bind port.</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">--metagraph_port</span></code></td>
+<td>Metagraph bind port.</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">--metagraph_size</span></code></td>
+<td>Metagraph cache size.</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">--bootstrap</span></code></td>
+<td>Metagraph boot peer.</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">--neuron_key</span></code></td>
+<td>Neuron Key.</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">--remote_ip</span></code></td>
+<td>Remote serving IP.</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">--model_path</span></code></td>
+<td>Path to a saved version of the model to resume training.</td>
 </tr>
 </tbody>
 </table>
+<p>To run a model on a given
+port number (e.g. 8120) that peers can connect to, you can run it as follows:</p>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>python main.py --metagraph_port <span class="m">8120</span>
+</pre></div>
+</div>
+<p>Once this model is running, you can run another model that bootstraps itself to port 8120 as follows:</p>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>python main.py --bootstrap <span class="s1">&#39;0.0.0.0:8120&#39;</span>
+</pre></div>
+</div>
+<p>This will run another instance of the model that will communicate with the first model and they will begin to share knowledge with each other.</p>
 </div>
 </div>
 
