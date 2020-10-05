@@ -18,28 +18,88 @@ Getting Started
 There are two ways to start BitTensor: via a native Python command, or via a dockerized instance. Typically, the dockerized instance is recommended 
 when training a full model to completion, whereas the Python command is best for debugging purposes. 
 
-Start Bittensor via docker
----------------------------
+Installation
+-------------
 
-Bittensor has a bash script that automatically pulls the latest image from Docker Hub 
-and constructs a docker container that is able to run a given model.
+1. Install or make sure you have installed `Python3 <https://www.python.org/downloads/>`_.
+2. Install or make sure you have installed `pip3 <https://pip.pypa.io/en/stable/installing/>`_.
+3.  If you do not have it installed already, install `virtualenv <https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/#installing-virtualenv>`_.
+4. If you wish to run BitTensor in dockerized containers, install `Docker Desktop`_.
+
+   .. _`Docker Desktop`: https://www.docker.com/products/docker-desktop
+
+5. Clone the `Bittensor <https://github.com/opentensor/bittensor>`_ repository locally: 
+
+.. code-block:: Bash
+
+   git clone git@github.com:opentensor/bittensor.git
+
+6. If you wish to simply run a dockerized bittensor instance, you may do so by running:
 
 .. code-block:: Bash
 
    ./start_bittensor.sh
 
-By default, the script will run the MNIST example network under :code:`examples/mnist` on :code:`localhost`.
-However, it is possible to specify the parameters of the run using the following flags:
+This will set up and bootstrap BitTensor in a local Docker container. If the process succeeds, 
+you should see a "BitTensor" ASCII banner as the model is bootstrapped and run on docker. The default model that runs in this case is the "MNIST" dataset model. 
+This is an example model that is set up under :code:`examples/mnist`. You can specify other models by using the :code:`-n, --neuron` flag described in :ref:`single bittensor`
 
-====================   ====================================================================
+7. Create a new virtual environment and activate it:
+
+.. code-block:: Bash
+
+   python3 -m venv env
+   source env/bin/activate
+
+8. Install required packages:
+
+.. code-block:: Bash
+
+   pip3 install -r requirements.txt
+
+9. You can verify your installation has succeeded by going to one of the examples and running its :code:`main.py` folder.
+
+.. code-block:: Bash
+
+   cd examples/mnist
+   python3 main.py
+
+Similarly to step 6, this will run the example with all the default flags. If everything installed as it should, 
+you should see an ASCII "BitTensor" printed before the model starts training.
+
+.. _single bittensor:
+
+Start a single Bittensor Instance via Docker
+--------------------------------------------
+
+Bittensor contains a bash script (:code:`start_bittensor.sh`) that automatically pulls the latest image from Docker Hub 
+and constructs a docker container that is able to run a given model. The parameters of :code:`start_bittensor.sh` are summarized as follows:
+
+=============================   ====================================================================
    Flag                           Description
-====================   ====================================================================
-:code:`n, --neuron`     Which model (also called a neuron) to run. E.g. MNIST, CIFAR, etc.
-:code:`-l, --logdir`    Logging directory
-:code:`-p, --port`      Bind side port for accepting requests.
-====================   ====================================================================
+=============================   ====================================================================
+:code:`-n, --neuron`             Which model (or "neuron") to run in :code:`examples/`. E.g. :code:`mnist`, :code:`cifar`, :code:`bert`, etc.
+:code:`-l, --logdir`             Logging directory
+:code:`-p, --port`               Bind side port for accepting requests.
+:code:`-c, --chain_endpoint`     Bittensor chain endpoint.
+:code:`-a, --axon_port`          Axon terminal bind port.
+:code:`-m, --metagraph_port`     Metagraph bind port.
+:code:`-s, --metagraph_size`     Metagraph cache size.
+:code:`-b, --bootstrap`          Metagraph boot peer.
+:code:`-k, --neuron_key`         Neuron Key.
+:code:`-r, --remote_ip`          Remote serving IP.
+:code:`-mp, --model_path`        Path to a saved version of the model to resume training.
+=============================   ====================================================================
 
-Start Bittensor via native Python on a single machine
+To start a dockerized version of a model, simply run the following: 
+
+.. code-block:: Bash
+
+   ./start_bittensor.sh
+
+This will utilize the default values for all of the above command line arguments and run the network under :code:`examples/mnist` on :code:`localhost`.
+
+Start a Single Bittensor Instance via native Python 
 -------------------------------------------------------
 
 First, ensure that you have :code:`Python 3.5` or above to run Bittensor. Once you have done so, you can move to the 
@@ -80,3 +140,12 @@ Once this model is running, you can run another model that bootstraps itself to 
    python main.py --bootstrap '0.0.0.0:8120'
 
 This will run another instance of the model that will communicate with the first model and they will begin to share knowledge with each other. 
+
+Start Multiple Bittensor Instances via Docker
+-----------------------------------------------
+The advantage bittensor is that it allows for *knowledge sharing* between models training together. This not only allows for more efficient training, 
+but also increases the possibilities for us to develop resilient generalist models, as opposed to narrow specialists. 
+
+Let's dive into how we can test running two models at the same time that can share knowledge with each other as they train. BitTensor utilizes 
+`gRPC <https://grpc.io/>`_ communication to send `PIL <http://www.pythonware.com/products/pil/>`_ data, tensors, 
+and gradients across the wire from one model to another model (also called a "peer").

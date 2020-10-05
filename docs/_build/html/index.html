@@ -84,8 +84,10 @@
               <div class="local-toc"><ul>
 <li><a class="reference internal" href="#">Bittensor Documentation</a></li>
 <li><a class="reference internal" href="#getting-started">Getting Started</a><ul>
-<li><a class="reference internal" href="#start-bittensor-via-docker">Start Bittensor via docker</a></li>
-<li><a class="reference internal" href="#start-bittensor-via-native-python-on-a-single-machine">Start Bittensor via native Python on a single machine</a></li>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#start-a-single-bittensor-instance-via-docker">Start a single Bittensor Instance via Docker</a></li>
+<li><a class="reference internal" href="#start-a-single-bittensor-instance-via-native-python">Start a Single Bittensor Instance via native Python</a></li>
+<li><a class="reference internal" href="#start-multiple-bittensor-instances-via-docker">Start Multiple Bittensor Instances via Docker</a></li>
 </ul>
 </li>
 </ul>
@@ -165,19 +167,58 @@
 <h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
 <p>There are two ways to start BitTensor: via a native Python command, or via a dockerized instance. Typically, the dockerized instance is recommended
 when training a full model to completion, whereas the Python command is best for debugging purposes.</p>
-<div class="section" id="start-bittensor-via-docker">
-<h2>Start Bittensor via docker<a class="headerlink" href="#start-bittensor-via-docker" title="Permalink to this headline">¶</a></h2>
-<p>Bittensor has a bash script that automatically pulls the latest image from Docker Hub
-and constructs a docker container that is able to run a given model.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Install or make sure you have installed <a class="reference external" href="https://www.python.org/downloads/">Python3</a>.</li>
+<li>Install or make sure you have installed <a class="reference external" href="https://pip.pypa.io/en/stable/installing/">pip3</a>.</li>
+<li>If you do not have it installed already, install <a class="reference external" href="https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/#installing-virtualenv">virtualenv</a>.</li>
+<li>If you wish to run BitTensor in dockerized containers, install <a class="reference external" href="https://www.docker.com/products/docker-desktop">Docker Desktop</a>.</li>
+<li>Clone the <a class="reference external" href="https://github.com/opentensor/bittensor">Bittensor</a> repository locally:</li>
+</ol>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>git clone git@github.com:opentensor/bittensor.git
+</pre></div>
+</div>
+<ol class="arabic simple" start="6">
+<li>If you wish to simply run a dockerized bittensor instance, you may do so by running:</li>
+</ol>
 <div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>./start_bittensor.sh
 </pre></div>
 </div>
-<p>By default, the script will run the MNIST example network under <code class="code docutils literal notranslate"><span class="pre">examples/mnist</span></code> on <code class="code docutils literal notranslate"><span class="pre">localhost</span></code>.
-However, it is possible to specify the parameters of the run using the following flags:</p>
+<p>This will set up and bootstrap BitTensor in a local Docker container. If the process succeeds,
+you should see a “BitTensor” ASCII banner as the model is bootstrapped and run on docker. The default model that runs in this case is the “MNIST” dataset model.
+This is an example model that is set up under <code class="code docutils literal notranslate"><span class="pre">examples/mnist</span></code>. You can specify other models by using the <code class="code docutils literal notranslate"><span class="pre">-n,</span> <span class="pre">--neuron</span></code> flag described in <a class="reference internal" href="#single-bittensor"><span class="std std-ref">Start a single Bittensor Instance via Docker</span></a></p>
+<ol class="arabic simple" start="7">
+<li>Create a new virtual environment and activate it:</li>
+</ol>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>python3 -m venv env
+<span class="nb">source</span> env/bin/activate
+</pre></div>
+</div>
+<ol class="arabic simple" start="8">
+<li>Install required packages:</li>
+</ol>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>pip3 install -r requirements.txt
+</pre></div>
+</div>
+<ol class="arabic simple" start="9">
+<li>You can verify your installation has succeeded by going to one of the examples and running its <code class="code docutils literal notranslate"><span class="pre">main.py</span></code> folder.</li>
+</ol>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> examples/mnist
+python3 main.py
+</pre></div>
+</div>
+<p>Similarly to step 6, this will run the example with all the default flags. If everything installed as it should,
+you should see an ASCII “BitTensor” printed before the model starts training.</p>
+</div>
+<div class="section" id="start-a-single-bittensor-instance-via-docker">
+<span id="single-bittensor"></span><h2>Start a single Bittensor Instance via Docker<a class="headerlink" href="#start-a-single-bittensor-instance-via-docker" title="Permalink to this headline">¶</a></h2>
+<p>Bittensor contains a bash script (<code class="code docutils literal notranslate"><span class="pre">start_bittensor.sh</span></code>) that automatically pulls the latest image from Docker Hub
+and constructs a docker container that is able to run a given model. The parameters of <code class="code docutils literal notranslate"><span class="pre">start_bittensor.sh</span></code> are summarized as follows:</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="23%" />
-<col width="77%" />
+<col width="21%" />
+<col width="79%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Flag</th>
@@ -185,8 +226,8 @@ However, it is possible to specify the parameters of the run using the following
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">n,</span> <span class="pre">--neuron</span></code></td>
-<td>Which model (also called a neuron) to run. E.g. MNIST, CIFAR, etc.</td>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">-n,</span> <span class="pre">--neuron</span></code></td>
+<td>Which model (or “neuron”) to run in <code class="code docutils literal notranslate"><span class="pre">examples/</span></code>. E.g. <code class="code docutils literal notranslate"><span class="pre">mnist</span></code>, <code class="code docutils literal notranslate"><span class="pre">cifar</span></code>, <code class="code docutils literal notranslate"><span class="pre">bert</span></code>, etc.</td>
 </tr>
 <tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">-l,</span> <span class="pre">--logdir</span></code></td>
 <td>Logging directory</td>
@@ -194,11 +235,40 @@ However, it is possible to specify the parameters of the run using the following
 <tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">-p,</span> <span class="pre">--port</span></code></td>
 <td>Bind side port for accepting requests.</td>
 </tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">-c,</span> <span class="pre">--chain_endpoint</span></code></td>
+<td>Bittensor chain endpoint.</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">-a,</span> <span class="pre">--axon_port</span></code></td>
+<td>Axon terminal bind port.</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">-m,</span> <span class="pre">--metagraph_port</span></code></td>
+<td>Metagraph bind port.</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">-s,</span> <span class="pre">--metagraph_size</span></code></td>
+<td>Metagraph cache size.</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">-b,</span> <span class="pre">--bootstrap</span></code></td>
+<td>Metagraph boot peer.</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">-k,</span> <span class="pre">--neuron_key</span></code></td>
+<td>Neuron Key.</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">-r,</span> <span class="pre">--remote_ip</span></code></td>
+<td>Remote serving IP.</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">-mp,</span> <span class="pre">--model_path</span></code></td>
+<td>Path to a saved version of the model to resume training.</td>
+</tr>
 </tbody>
 </table>
+<p>To start a dockerized version of a model, simply run the following:</p>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>./start_bittensor.sh
+</pre></div>
 </div>
-<div class="section" id="start-bittensor-via-native-python-on-a-single-machine">
-<h2>Start Bittensor via native Python on a single machine<a class="headerlink" href="#start-bittensor-via-native-python-on-a-single-machine" title="Permalink to this headline">¶</a></h2>
+<p>This will utilize the default values for all of the above command line arguments and run the network under <code class="code docutils literal notranslate"><span class="pre">examples/mnist</span></code> on <code class="code docutils literal notranslate"><span class="pre">localhost</span></code>.</p>
+</div>
+<div class="section" id="start-a-single-bittensor-instance-via-native-python">
+<h2>Start a Single Bittensor Instance via native Python<a class="headerlink" href="#start-a-single-bittensor-instance-via-native-python" title="Permalink to this headline">¶</a></h2>
 <p>First, ensure that you have <code class="code docutils literal notranslate"><span class="pre">Python</span> <span class="pre">3.5</span></code> or above to run Bittensor. Once you have done so, you can move to the
 <code class="code docutils literal notranslate"><span class="pre">examples</span></code> directory and pick a model to run. You can run the model directly by calling:</p>
 <div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>python main.py
@@ -253,6 +323,14 @@ port number (e.g. 8120) that peers can connect to, you can run it as follows:</p
 </pre></div>
 </div>
 <p>This will run another instance of the model that will communicate with the first model and they will begin to share knowledge with each other.</p>
+</div>
+<div class="section" id="start-multiple-bittensor-instances-via-docker">
+<h2>Start Multiple Bittensor Instances via Docker<a class="headerlink" href="#start-multiple-bittensor-instances-via-docker" title="Permalink to this headline">¶</a></h2>
+<p>The advantage bittensor is that it allows for <em>knowledge sharing</em> between models training together. This not only allows for more efficient training,
+but also increases the possibilities for us to develop resilient generalist models, as opposed to narrow specialists.</p>
+<p>Let’s dive into how we can test running two models at the same time that can share knowledge with each other as they train. BitTensor utilizes
+<a class="reference external" href="https://grpc.io/">gRPC</a> communication to send <a class="reference external" href="http://www.pythonware.com/products/pil/">PIL</a> data, tensors,
+and gradients across the wire from one model to another model (also called a “peer”).</p>
 </div>
 </div>
 
