@@ -1,0 +1,276 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Run Bittensor via Docker &mdash; Bittensor 1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Run Bittensor via Python" href="run-bittensor-via-python.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Bittensor
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Run Bittensor via Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run-bittensor-via-python.html">Run Bittensor via Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run-multiple-bittensor-instances.html">Running Multiple Bittensor Instances</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Bittensor</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Run Bittensor via Docker</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/crate/crate-docs-theme/blob/master/docs/getting-started/run-bittensor-via-docker.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="run-bittensor-via-docker">
+<h1>Run Bittensor via Docker<a class="headerlink" href="#run-bittensor-via-docker" title="Permalink to this headline">¶</a></h1>
+<p>Since Docker containers encapsulate everything an application needs to run (and only those things), any host with the Docker runtime
+installed (be it a developer’s laptop or a public cloud instance) can run a Docker container. This is
+very useful when deploying your model to a cloud GPU or some remote peer if you do not wish to handle
+the hassle of setting up an environment locally. Hence, once a model has been trained and is ready to be
+deployed onto the Bittensor network, you may wish to use Docker to deploy it somewhere instead of a native Python call.
+For this purpose, Bittensor contains a bash script (<code class="code docutils literal notranslate"><span class="pre">start_bittensor.sh</span></code>) that automatically pulls the latest
+image from Docker Hub and constructs a docker container that is able to run a given model. The parameters of <code class="code docutils literal notranslate"><span class="pre">start_bittensor.sh</span></code> are summarized as follows:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Flag</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">-n,</span> <span class="pre">--neuron</span></code></td>
+<td>Which model (or “neuron”) to run in <code class="code docutils literal notranslate"><span class="pre">examples/</span></code>. E.g. <code class="code docutils literal notranslate"><span class="pre">mnist</span></code>, <code class="code docutils literal notranslate"><span class="pre">cifar</span></code>, <code class="code docutils literal notranslate"><span class="pre">bert</span></code>, etc.</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">-l,</span> <span class="pre">--logdir</span></code></td>
+<td>Logging directory</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">-p,</span> <span class="pre">--port</span></code></td>
+<td>Bind side port for accepting requests.</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">-c,</span> <span class="pre">--chain_endpoint</span></code></td>
+<td>Bittensor chain endpoint.</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">-a,</span> <span class="pre">--axon_port</span></code></td>
+<td>Axon terminal bind port.</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">-m,</span> <span class="pre">--metagraph_port</span></code></td>
+<td>Metagraph bind port.</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">-s,</span> <span class="pre">--metagraph_size</span></code></td>
+<td>Metagraph cache size.</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">-b,</span> <span class="pre">--bootstrap</span></code></td>
+<td>Metagraph boot peer.</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">-k,</span> <span class="pre">--neuron_key</span></code></td>
+<td>Neuron Key.</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">-r,</span> <span class="pre">--remote_ip</span></code></td>
+<td>Remote serving IP.</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">-mp,</span> <span class="pre">--model_path</span></code></td>
+<td>Path to a saved version of the model to resume training.</td>
+</tr>
+</tbody>
+</table>
+<p>To start a dockerized version of a model, simply run the following:</p>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>./start_bittensor.sh
+</pre></div>
+</div>
+<p>This will utilize the default values for all of the above command line arguments and run the network under <code class="code docutils literal notranslate"><span class="pre">examples/mnist</span></code> on <code class="code docutils literal notranslate"><span class="pre">localhost</span></code>.</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="run-bittensor-via-python.html" class="btn btn-neutral float-right" title="Run Bittensor via Python" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Ala Shaabana, Jacob Steeves, and the Bittensor community
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,258 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Installation &mdash; Bittensor 1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Run Bittensor via Docker" href="run-bittensor-via-docker.html" />
+    <link rel="prev" title="Bittensor Documentation" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Bittensor
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run-bittensor-via-docker.html">Run Bittensor via Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run-bittensor-via-python.html">Run Bittensor via Python</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Bittensor</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Installation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/crate/crate-docs-theme/blob/master/docs/getting-started/installation.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<ol class="arabic simple">
+<li>Install or make sure you have installed <a class="reference external" href="https://www.python.org/downloads/">Python3</a>.</li>
+<li>Install or make sure you have installed <a class="reference external" href="https://pip.pypa.io/en/stable/installing/">pip3</a>.</li>
+<li>If you do not have it installed already, install <a class="reference external" href="https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/#installing-virtualenv">virtualenv</a>.</li>
+<li>If you wish to run Bittensor in dockerized containers, install <a class="reference external" href="https://www.docker.com/products/docker-desktop">Docker Desktop</a>.</li>
+<li>Clone the <a class="reference external" href="https://github.com/opentensor/bittensor">Bittensor</a> repository locally:</li>
+</ol>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>git clone git@github.com:opentensor/bittensor.git
+</pre></div>
+</div>
+<ol class="arabic simple" start="6">
+<li>If you wish to simply run a dockerized Bittensor instance, you may do so by running:</li>
+</ol>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>./start_bittensor.sh
+</pre></div>
+</div>
+<p>This will set up and bootstrap Bittensor in a local Docker container. If the process succeeds,
+you should see a “Bittensor” ASCII banner as the model is bootstrapped and run on docker. The default model that runs in this case is the “MNIST” dataset model.
+This is an example model that is set up under <code class="code docutils literal notranslate"><span class="pre">examples/mnist</span></code>. You can specify other models by using the <code class="code docutils literal notranslate"><span class="pre">-n,</span> <span class="pre">--neuron</span></code> flag.</p>
+<ol class="arabic simple" start="7">
+<li>Create a new virtual environment and activate it:</li>
+</ol>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>python3 -m venv env
+<span class="nb">source</span> env/bin/activate
+</pre></div>
+</div>
+<ol class="arabic simple" start="8">
+<li>Install required packages:</li>
+</ol>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>pip3 install -r requirements.txt
+</pre></div>
+</div>
+<ol class="arabic simple" start="9">
+<li>You can verify your installation has succeeded by going to one of the examples and running its <code class="code docutils literal notranslate"><span class="pre">main.py</span></code> folder.</li>
+</ol>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> examples/mnist
+python3 main.py
+</pre></div>
+</div>
+<p>Similarly to step 6, this will run the example with all the default flags. If everything installed as it should,
+you should see an ASCII “Bittensor” printed before the model starts training.</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="run-bittensor-via-docker.html" class="btn btn-neutral float-right" title="Run Bittensor via Docker" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral float-left" title="Bittensor Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Ala Shaabana, Jacob Steeves, and the Bittensor community
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
