@@ -40,17 +40,17 @@ the communications protocol and message types that travel between nodes/instance
     =========================================  =============================================================
 
 
-3. :code:`DataType` enum. 
+4. :code:`DataType` enum. 
     - Used for serialization/deserialization of messages as they travel through the wire.
     - Data types can be  :code:`UNKNOWN`, :code:`FLOAT32`, :code:`INT32`, :code:`INT64`, or :code:`UTF8`.
     - Described `here <https://github.com/opentensor/bittensor/blob/master/bittensor/bittensor.proto#L230>`__. 
 
-4. :code:`Modality` enum.
+5. :code:`Modality` enum.
     - Modality of the message (TEXT, IMAGE, TENSOR).
     - Described `here <https://github.com/opentensor/bittensor/blob/master/bittensor/bittensor.proto#L239>`__.
 
 
-5. :code:`TensorMessage` message.
+6. :code:`TensorMessage` message.
     - The primary protobuf message object passed between tensor processing servers.
     - Contains a payload of 1 or more serialized tensors and their definitions.
         - **version** –  Indentifies protocol version for backward compatibility.
@@ -80,7 +80,7 @@ the communications protocol and message types that travel between nodes/instance
                                                 | and thus is required. 
     =======================================  =============================================================
 
-6. :code:`Tensor` message.
+7. :code:`Tensor` message.
     - A serialized tensor object created using the serializer class.
     - Essentially used to describe a tensor being passed on the wire.
 
