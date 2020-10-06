@@ -1,0 +1,264 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Bittensor Architecture &mdash; Bittensor 1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="gRPC Protocol" href="grpc-protocol.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Bittensor
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/run-bittensor-via-docker.html">Run Bittensor via Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/run-bittensor-via-python.html">Run Bittensor via Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/run-multiple-bittensor-instances.html">Running Multiple Bittensor Instances</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Bittensor</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="grpc-protocol.html">gRPC Protocol</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Bittensor Architecture</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#biological-inspiration">Biological Inspiration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-bittensor-network">The Bittensor Network</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Bittensor</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Bittensor Architecture</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/crate/crate-docs-theme/blob/master/docs/bittensor-deep-dive/bittensor-architecture.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="bittensor-architecture">
+<h1>Bittensor Architecture<a class="headerlink" href="#bittensor-architecture" title="Permalink to this headline">¶</a></h1>
+<p>The inspiration for Bittensor came from brain cells (called neurons). In the same way that a network
+of neurons consists of multiple neurons communicating with each other continuously, so does the Bittensor
+network consist of multiple machine learning models (also called neurons) communicating with each other.</p>
+<p>Therefore to help in understanding the Bittensor network architecture, we use
+biological neurons as inspiration and an analogous example.</p>
+<div class="section" id="biological-inspiration">
+<h2>Biological Inspiration<a class="headerlink" href="#biological-inspiration" title="Permalink to this headline">¶</a></h2>
+<p>The Figure below describes a biological neuron that contains three important parts:</p>
+<ol class="arabic simple">
+<li><strong>Dendrite</strong>: responsible for receiving information from other neurons.</li>
+<li><strong>Axon Terminal</strong>: responsible for sending information to other neurons.</li>
+<li><strong>Soma</strong>: Contains the nucleus and other structures common to living cells.</li>
+</ol>
+<p>These three parts together enable a neuron to exchange messages with each other and form a
+massive interconnected network that – on the grand scale – form a brain. Note that
+this is a highly simplified explanation, and biological neurons are significantly more complex.</p>
+<div class="figure" id="id1">
+<img alt="../_images/bio_neuron.jpg" src="../_images/bio_neuron.jpg" />
+<p class="caption"><span class="caption-text">Biological neuron cell. Credit: David Baillot/ UC San Diego.</span></p>
+</div>
+</div>
+<div class="section" id="the-bittensor-network">
+<h2>The Bittensor Network<a class="headerlink" href="#the-bittensor-network" title="Permalink to this headline">¶</a></h2>
+<p>Similarly to its biological counterpart, the Bittensor neuron also exchanges messages with other
+neurons in the form of <cite>machine knowledge</cite>. A group of these neurons can connect together to form a
+network of interconnected models that are able to learn form each other.</p>
+<p>Bittensor Neuron examples can be found under <code class="code docutils literal notranslate"><span class="pre">examples</span></code>. Presently, there are 3 examples:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/opentensor/bittensor/tree/master/examples/mnist">MNIST</a> : The most basic neuron example. A simple feed-forward network that takes 32x32 images as input.</li>
+<li><a class="reference external" href="https://github.com/opentensor/bittensor/tree/master/examples/cifar">CIFAR</a> : A more complicated Dual Path Neural Network (As described by <a class="reference external" href="https://arxiv.org/abs/1707.01629">Chen et al.</a>) that takes as input the CIFAR-10 dataset.</li>
+<li><a class="reference external" href="https://github.com/opentensor/bittensor/tree/master/examples/bert">BERT</a> : A complete implementation of <a class="reference external" href="https://huggingface.co/transformers/">Huggingface’s bert model</a>.</li>
+</ul>
+<p>For the rest of this document, we will refer to <strong>MNIST</strong> during our examples as it is the most straightforward network, and hence
+easier to understand the architecture of Bittensor through it.</p>
+<div class="figure" id="id2">
+<img alt="../_images/Bittensor.png" src="../_images/Bittensor.png" />
+<p class="caption"><span class="caption-text">Bird’s-eye view of the communication between two Bittensor nodes.</span></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="grpc-protocol.html" class="btn btn-neutral float-left" title="gRPC Protocol" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Ala Shaabana, Jacob Steeves, and the Bittensor community
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

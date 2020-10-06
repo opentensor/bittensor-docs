@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 Bittensor Documentation
-===================================================
+========================
 Welcome to the official documentation of `Bittensor <https://github.com/opentensor/bittensor>`__, the peer-to-peer machine intelligence framework. 
 
 The dominant tools used to guide machine intelligence are typically benchmarks
@@ -26,7 +26,8 @@ within a network of intelligence systems.
 .. toctree::
    :maxdepth: 4
    :hidden:
-   :caption: Bittensor Architecture
+   :caption: Bittensor
    
-   /bittensor-deep-dive/end-to-end
+   /bittensor-deep-dive/grpc-protocol
+   /bittensor-deep-dive/bittensor-architecture
 
