@@ -90,7 +90,17 @@
 </ul>
 <p class="caption"><span class="caption-text">Bittensor Architecture</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">gRPC Protocol</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">gRPC Protocol</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#bittensor-service"><code class="code docutils literal notranslate"><span class="pre">Bittensor</span></code> service.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#metagraph-service"><code class="code docutils literal notranslate"><span class="pre">Metagraph</span></code> service.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#gossipbatch-message"><code class="code docutils literal notranslate"><span class="pre">GossipBatch</span></code> message.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#datatype-enum"><code class="code docutils literal notranslate"><span class="pre">DataType</span></code> enum.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#modality-enum"><code class="code docutils literal notranslate"><span class="pre">Modality</span></code> enum.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tensormessage-message"><code class="code docutils literal notranslate"><span class="pre">TensorMessage</span></code> message.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tensor-message"><code class="code docutils literal notranslate"><span class="pre">Tensor</span></code> message.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#synapse-message"><code class="code docutils literal notranslate"><span class="pre">Synapse</span></code> message.</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -163,14 +173,14 @@
 <p>The BitTensor <a class="reference external" href="https://grpc.io/">gRPC</a> protocol definition can be
 found <a class="reference external" href="https://github.com/opentensor/bittensor/blob/master/bittensor/bittensor.proto">here</a>. The following define
 the communications protocol and message types that travel between nodes/instances of Bittensor.</p>
-<ol class="arabic">
-<li><dl class="first docutils">
-<dt><code class="code docutils literal notranslate"><span class="pre">Bittensor</span></code> service.</dt>
-<dd><ul class="first simple">
+<div class="section" id="bittensor-service">
+<h2><code class="code docutils literal notranslate"><span class="pre">Bittensor</span></code> service.<a class="headerlink" href="#bittensor-service" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
 <li>Service definition for tensor processing servers.</li>
 <li>RPC Methods:</li>
 </ul>
-<table border="1" class="last docutils">
+<table border="1" class="docutils">
 <colgroup>
 <col width="45%" />
 <col width="33%" />
@@ -197,16 +207,16 @@ the communications protocol and message types that travel between nodes/instance
 </tr>
 </tbody>
 </table>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt><code class="code docutils literal notranslate"><span class="pre">Metagraph</span></code> service.</dt>
-<dd><ul class="first simple">
+</div></blockquote>
+</div>
+<div class="section" id="metagraph-service">
+<h2><code class="code docutils literal notranslate"><span class="pre">Metagraph</span></code> service.<a class="headerlink" href="#metagraph-service" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
 <li>Service definition for a cache for sharing bittensor synapses.</li>
 <li>This will be replaced by a Blockchain in the future, and <strong>is for testing purposes only.</strong></li>
 </ul>
-<table border="1" class="last docutils">
+<table border="1" class="docutils">
 <colgroup>
 <col width="45%" />
 <col width="33%" />
@@ -229,16 +239,16 @@ the communications protocol and message types that travel between nodes/instance
 </tr>
 </tbody>
 </table>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt><code class="code docutils literal notranslate"><span class="pre">GossipBatch</span></code> message.</dt>
-<dd><ul class="first simple">
+</div></blockquote>
+</div>
+<div class="section" id="gossipbatch-message">
+<h2><code class="code docutils literal notranslate"><span class="pre">GossipBatch</span></code> message.<a class="headerlink" href="#gossipbatch-message" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
 <li>Batch of neuron service definitions.</li>
 <li>Gossip message sent across the wire to bootstrap to peers.</li>
 </ul>
-<table border="1" class="last docutils">
+<table border="1" class="docutils">
 <colgroup>
 <col width="40%" />
 <col width="60%" />
@@ -260,33 +270,31 @@ the communications protocol and message types that travel between nodes/instance
 </tr>
 </tbody>
 </table>
-</dd>
-</dl>
-</li>
-</ol>
-<ol class="arabic" start="3">
-<li><dl class="first docutils">
-<dt><code class="code docutils literal notranslate"><span class="pre">DataType</span></code> enum.</dt>
-<dd><ul class="first last simple">
+</div></blockquote>
+</div>
+<div class="section" id="datatype-enum">
+<h2><code class="code docutils literal notranslate"><span class="pre">DataType</span></code> enum.<a class="headerlink" href="#datatype-enum" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
 <li>Used for serialization/deserialization of messages as they travel through the wire.</li>
 <li>Data types can be  <code class="code docutils literal notranslate"><span class="pre">UNKNOWN</span></code>, <code class="code docutils literal notranslate"><span class="pre">FLOAT32</span></code>, <code class="code docutils literal notranslate"><span class="pre">INT32</span></code>, <code class="code docutils literal notranslate"><span class="pre">INT64</span></code>, or <code class="code docutils literal notranslate"><span class="pre">UTF8</span></code>.</li>
 <li>Described <a class="reference external" href="https://github.com/opentensor/bittensor/blob/master/bittensor/bittensor.proto#L230">here</a>.</li>
 </ul>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt><code class="code docutils literal notranslate"><span class="pre">Modality</span></code> enum.</dt>
-<dd><ul class="first last simple">
+</div></blockquote>
+</div>
+<div class="section" id="modality-enum">
+<h2><code class="code docutils literal notranslate"><span class="pre">Modality</span></code> enum.<a class="headerlink" href="#modality-enum" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
 <li>Modality of the message (TEXT, IMAGE, TENSOR).</li>
 <li>Described <a class="reference external" href="https://github.com/opentensor/bittensor/blob/master/bittensor/bittensor.proto#L239">here</a>.</li>
 </ul>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt><code class="code docutils literal notranslate"><span class="pre">TensorMessage</span></code> message.</dt>
-<dd><ul class="first simple">
+</div></blockquote>
+</div>
+<div class="section" id="tensormessage-message">
+<h2><code class="code docutils literal notranslate"><span class="pre">TensorMessage</span></code> message.<a class="headerlink" href="#tensormessage-message" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
 <li>The primary protobuf message object passed between tensor processing servers.</li>
 <li><dl class="first docutils">
 <dt>Contains a payload of 1 or more serialized tensors and their definitions.</dt>
@@ -299,7 +307,7 @@ the communications protocol and message types that travel between nodes/instance
 </li>
 <li>Also contains information to identity and verify the sender.</li>
 </ul>
-<table border="1" class="last docutils">
+<table border="1" class="docutils">
 <colgroup>
 <col width="39%" />
 <col width="61%" />
@@ -357,16 +365,16 @@ the communications protocol and message types that travel between nodes/instance
 </tr>
 </tbody>
 </table>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt><code class="code docutils literal notranslate"><span class="pre">Tensor</span></code> message.</dt>
-<dd><ul class="first simple">
+</div></blockquote>
+</div>
+<div class="section" id="tensor-message">
+<h2><code class="code docutils literal notranslate"><span class="pre">Tensor</span></code> message.<a class="headerlink" href="#tensor-message" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
 <li>A serialized tensor object created using the serializer class.</li>
 <li>Essentially used to describe a tensor being passed on the wire.</li>
 </ul>
-<table border="1" class="last docutils">
+<table border="1" class="docutils">
 <colgroup>
 <col width="38%" />
 <col width="63%" />
@@ -408,16 +416,16 @@ the communications protocol and message types that travel between nodes/instance
 </tr>
 </tbody>
 </table>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt><code class="code docutils literal notranslate"><span class="pre">Synapse</span></code> message.</dt>
-<dd><ul class="first simple">
+</div></blockquote>
+</div>
+<div class="section" id="synapse-message">
+<h2><code class="code docutils literal notranslate"><span class="pre">Synapse</span></code> message.<a class="headerlink" href="#synapse-message" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
 <li>“Synapse” or “Expert” endpoint definition.</li>
 <li>This fully describes a tensor processing service for Bittensor (as well as <a class="reference external" href="https://learning-at-home.readthedocs.io/en/latest/?badge=latest">hivemind</a>).</li>
 </ul>
-<table border="1" class="last docutils">
+<table border="1" class="docutils">
 <colgroup>
 <col width="38%" />
 <col width="63%" />
@@ -479,10 +487,8 @@ the communications protocol and message types that travel between nodes/instance
 </tr>
 </tbody>
 </table>
-</dd>
-</dl>
-</li>
-</ol>
+</div></blockquote>
+</div>
 </div>
 
 
