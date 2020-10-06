@@ -4,17 +4,53 @@ The BitTensor `gRPC <https://grpc.io/>`_ protocol definition can be
 found `here <https://github.com/opentensor/bittensor/blob/master/bittensor/bittensor.proto>`__. The following define
 the communications protocol and message types that travel between nodes/instances of Bittensor.
 
-1. :code:`DataType` enum. 
+1. :code:`Bittensor` service.
+    - Service definition for tensor processing servers.
+    - RPC Methods:
+
+    ============================================= ================================= =======================
+    Method                                          Description                      Returns
+    ============================================= ================================= =======================
+    Forward (:code:`TensorMessage`)                 Forward tensor request.          :code:`TensorMessage`
+    Backward (:code:`TensorMessage`)                | Backward tensor request        :code:`TensorMessage`
+                                                    | (i.e. pass gradients back)
+    ============================================= ================================= =======================
+
+2. :code:`Metagraph` service.
+    - Service definition for a cache for sharing bittensor synapses.
+    - This will be replaced by a Blockchain in the future, and **is for testing purposes only.**
+
+    ============================================= ================================= =======================
+    Method                                          Description                            Returns
+    ============================================= ================================= =======================
+    Gossip (:code:`GossipBatch`)                    | Use gossip protocol to find     :code:`GossipBatch`
+                                                    | other peers on the network.    
+    ============================================= ================================= =======================
+
+3. :code:`GossipBatch` message.
+    - Batch of neuron service definitions.
+    - Gossip message sent across the wire to bootstrap to peers.
+
+    =========================================  =============================================================
+        GossipBatch Payload                           Description
+    =========================================  =============================================================
+    :code:`STRING` version [required]          Identifies protocol version for backward compatibility.
+    :code:`REPEATED STRING` peers [required]   List of metagraph peer addresses.  
+    :code:`SYNAPSE` synapses                   Synapse endpoint definitions.
+    =========================================  =============================================================
+
+
+3. :code:`DataType` enum. 
     - Used for serialization/deserialization of messages as they travel through the wire.
     - Data types can be  :code:`UNKNOWN`, :code:`FLOAT32`, :code:`INT32`, :code:`INT64`, or :code:`UTF8`.
     - Described `here <https://github.com/opentensor/bittensor/blob/master/bittensor/bittensor.proto#L230>`__. 
 
-2. :code:`Modality` enum.
+4. :code:`Modality` enum.
     - Modality of the message (TEXT, IMAGE, TENSOR).
     - Described `here <https://github.com/opentensor/bittensor/blob/master/bittensor/bittensor.proto#L239>`__.
 
 
-3. :code:`TensorMessage` message.
+5. :code:`TensorMessage` message.
     - The primary protobuf message object passed between tensor processing servers.
     - Contains a payload of 1 or more serialized tensors and their definitions.
         - **version** –  Indentifies protocol version for backward compatibility.
@@ -44,7 +80,7 @@ the communications protocol and message types that travel between nodes/instance
                                                 | and thus is required. 
     =======================================  =============================================================
 
-4. :code:`Tensor` message.
+6. :code:`Tensor` message.
     - A serialized tensor object created using the serializer class.
     - Essentially used to describe a tensor being passed on the wire.
 
@@ -64,7 +100,7 @@ the communications protocol and message types that travel between nodes/instance
     :code:`bool` requires_grad [optional]       Whether or not this tensor require a gradient.
     =======================================  =================================================================
 
-5. :code:`Synapse` message.
+7. :code:`Synapse` message.
     - "Synapse" or "Expert" endpoint definition.
     - This fully describes a tensor processing service for Bittensor (as well as `hivemind <https://learning-at-home.readthedocs.io/en/latest/?badge=latest>`_).
     
