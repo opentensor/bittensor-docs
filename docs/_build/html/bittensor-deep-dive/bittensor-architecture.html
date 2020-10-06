@@ -200,6 +200,12 @@ network of interconnected models that are able to learn form each other.</p>
 </ul>
 <p>For the rest of this document, we will refer to <strong>MNIST</strong> during our examples as it is the most straightforward network, and hence
 easier to understand the architecture of Bittensor through it.</p>
+<p>Assume we have two neurons as in the figure below, where each neuron contains 3 main components:</p>
+<ol class="arabic simple">
+<li><strong>Axon Terminal</strong>: Responsible for deploying a synapse and receiving information coming from a remote synapse.</li>
+<li><strong>Dendrite</strong>: Responsible for sending information to a remote synapse.</li>
+<li><strong>Neuron</strong>: Effectively the “soma” of a bittensor node. Contains the local model as well as the training and testing logic.</li>
+</ol>
 <div class="figure" id="id2">
 <img alt="../_images/Bittensor.png" src="../_images/Bittensor.png" />
 <p class="caption"><span class="caption-text">Bird’s-eye view of the communication between two Bittensor nodes.</span></p>

@@ -44,6 +44,14 @@ Bittensor Neuron examples can be found under :code:`examples`. Presently, there 
 For the rest of this document, we will refer to **MNIST** during our examples as it is the most straightforward network, and hence 
 easier to understand the architecture of Bittensor through it. 
 
+Assume we have two neurons as in the figure below, where each neuron contains 3 main components:
+
+1. **Axon Terminal**: Responsible for deploying a synapse and receiving information coming from a remote synapse. 
+
+2. **Dendrite**: Responsible for sending information to a remote synapse. 
+
+3. **Neuron**: Effectively the "soma" of a bittensor node. Contains the local model as well as the training and testing logic.  
+
 .. figure:: 
     /images/Bittensor.png
 
