@@ -7,8 +7,14 @@ Bittensor Documentation
 ===================================================
 Welcome to the official documentation of `Bittensor <https://github.com/opentensor/bittensor>`__, the peer-to-peer machine intelligence framework. 
 
+The dominant tools used to guide machine intelligence are typically benchmarks
+which rank systems on a set of predefined tasks. However, the narrow low 
+resolution definition of intelligence provided by these benchmarks make them inefficient
+guides for the field. Bittensor is an expanded framework that measures knowledge production from 
+within a network of intelligence systems.
+
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 2
    :hidden:
    :caption: Getting Started
    
@@ -16,3 +22,11 @@ Welcome to the official documentation of `Bittensor <https://github.com/opentens
    /getting-started/run-bittensor-via-docker
    /getting-started/run-bittensor-via-python
    /getting-started/run-multiple-bittensor-instances
+
+.. toctree::
+   :maxdepth: 4
+   :hidden:
+   :caption: Bittensor Architecture
+   
+   /bittensor-deep-dive/end-to-end
+

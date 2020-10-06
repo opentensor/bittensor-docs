@@ -1,0 +1,441 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>gRPC Protocol &mdash; Bittensor 1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Running Multiple Bittensor Instances" href="../getting-started/run-multiple-bittensor-instances.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Bittensor
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/run-bittensor-via-docker.html">Run Bittensor via Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/run-bittensor-via-python.html">Run Bittensor via Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/run-multiple-bittensor-instances.html">Running Multiple Bittensor Instances</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Bittensor Architecture</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">gRPC Protocol</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Bittensor</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>gRPC Protocol</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/crate/crate-docs-theme/blob/master/docs/bittensor-deep-dive/end-to-end.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="grpc-protocol">
+<h1>gRPC Protocol<a class="headerlink" href="#grpc-protocol" title="Permalink to this headline">¶</a></h1>
+<p>The BitTensor <a class="reference external" href="https://grpc.io/">gRPC</a> protocol definition can be
+found <a class="reference external" href="https://github.com/opentensor/bittensor/blob/master/bittensor/bittensor.proto">here</a>. The following define
+the communications protocol and message types that travel between nodes/instances of Bittensor.</p>
+<ol class="arabic">
+<li><dl class="first docutils">
+<dt><code class="code docutils literal notranslate"><span class="pre">DataType</span></code> enum.</dt>
+<dd><ul class="first last simple">
+<li>Used for serialization/deserialization of messages as they travel through the wire.</li>
+<li>Data types can be  <code class="code docutils literal notranslate"><span class="pre">UNKNOWN</span></code>, <code class="code docutils literal notranslate"><span class="pre">FLOAT32</span></code>, <code class="code docutils literal notranslate"><span class="pre">INT32</span></code>, <code class="code docutils literal notranslate"><span class="pre">INT64</span></code>, or <code class="code docutils literal notranslate"><span class="pre">UTF8</span></code>.</li>
+<li>Described <a class="reference external" href="https://github.com/opentensor/bittensor/blob/master/bittensor/bittensor.proto#L230">here</a>.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="code docutils literal notranslate"><span class="pre">Modality</span></code> enum.</dt>
+<dd><ul class="first last simple">
+<li>Modality of the message (TEXT, IMAGE, TENSOR).</li>
+<li>Described <a class="reference external" href="https://github.com/opentensor/bittensor/blob/master/bittensor/bittensor.proto#L239">here</a>.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="code docutils literal notranslate"><span class="pre">TensorMessage</span></code> message.</dt>
+<dd><ul class="first simple">
+<li>The primary protobuf message object passed between tensor processing servers.</li>
+<li><dl class="first docutils">
+<dt>Contains a payload of 1 or more serialized tensors and their definitions.</dt>
+<dd><ul class="first last">
+<li><strong>version</strong> –  Indentifies protocol version for backward compatibility.</li>
+<li><strong>neuron_key</strong> – Public key of the caller.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>Also contains information to identity and verify the sender.</li>
+</ul>
+<table border="1" class="last docutils">
+<colgroup>
+<col width="39%" />
+<col width="61%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">TensorMessage Payload</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">STRING</span></code> version [required]</td>
+<td>Identifies protocol version for backward compatibility.</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">STRING</span></code> neuron_key [required]</td>
+<td><div class="first last line-block">
+<div class="line">Public key of the calling server. This is used to</div>
+<div class="line">identify the calling server (i.e. neuron) to</div>
+<div class="line">the synapse of the receiving server (i.e.</div>
+<div class="line">the receiving synapse).</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">STRING</span></code> synapse_key [required]</td>
+<td><div class="first last line-block">
+<div class="line">Public key of the receiving synapse. This is used to</div>
+<div class="line">identify which synapse to query behind the endpoint,</div>
+<div class="line">as an endpoint may have multiple synapses.</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">INT64</span></code>  nounce [optional]</td>
+<td><div class="first last line-block">
+<div class="line">Incrementing nounce to identify message ordering.</div>
+<div class="line">Used ensure with signature to protect against</div>
+<div class="line">spoofing attacks.</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">BYTES</span></code>  signature [optional]</td>
+<td><div class="first last line-block">
+<div class="line">Digital signature linking the nounce, neuron_key</div>
+<div class="line">and synapse_key. This prevents spoofing attacks</div>
+<div class="line">where an adversary sends messages pretending</div>
+<div class="line">to be other peers.</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">TENSOR</span></code> tensors [required]</td>
+<td><div class="first last line-block">
+<div class="line">1 or more tensors passed on the wire. This is the</div>
+<div class="line">whole point of having a TensorMessage,</div>
+<div class="line">and thus is required.</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="code docutils literal notranslate"><span class="pre">Tensor</span></code> message.</dt>
+<dd><ul class="first simple">
+<li>A serialized tensor object created using the serializer class.</li>
+<li>Essentially used to describe a tensor being passed on the wire.</li>
+</ul>
+<table border="1" class="last docutils">
+<colgroup>
+<col width="38%" />
+<col width="63%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Tensor Payload</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">STRING</span></code> version [required]</td>
+<td>Identifies protocol version for backward compatibility.</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">BYTES</span></code> buffer [required]</td>
+<td><div class="first last line-block">
+<div class="line">Serialized raw tensor content. Since this is serialized,</div>
+<div class="line">this representation can be used for all tensor types.</div>
+<div class="line">The purpose of this serialization is to reduce overhead</div>
+<div class="line">during RPC calls by avoiding the serialization of</div>
+<div class="line">many repeated small items.</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">repeated</span> <span class="pre">INT64</span></code> shape [required]</td>
+<td>Tensor shape.</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">DataType</span></code> dtype [required]</td>
+<td><div class="first last line-block">
+<div class="line">The tensor datatype. Used for serialization</div>
+<div class="line">and deserialization.</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">Modality</span></code> modality [required]</td>
+<td>Modality of the message (TEXT, IMAGE, TENSOR)</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">bool</span></code> requires_grad [optional]</td>
+<td>Whether or not this tensor require a gradient.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="code docutils literal notranslate"><span class="pre">Synapse</span></code> message.</dt>
+<dd><ul class="first simple">
+<li>“Synapse” or “Expert” endpoint definition.</li>
+<li>This fully describes a tensor processing service for Bittensor (as well as <a class="reference external" href="https://learning-at-home.readthedocs.io/en/latest/?badge=latest">hivemind</a>).</li>
+</ul>
+<table border="1" class="last docutils">
+<colgroup>
+<col width="38%" />
+<col width="63%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Synapse Payload</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">STRING</span></code> version [required]</td>
+<td>Identifies protocol version for backward compatibility.</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">STRING</span></code> neuron_key [required]</td>
+<td><div class="first last line-block">
+<div class="line">Public key of the calling neuron.</div>
+<div class="line">This is used to identify the calling server (i.e. neuron) to</div>
+<div class="line">the synapse of the receiving server</div>
+<div class="line">(i.e. the receiving synapse). Links this synapse definition</div>
+<div class="line">to the containing neuron-account.</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">STRING</span></code> synapse_key [required]</td>
+<td><div class="first last line-block">
+<div class="line">Public key of this synapse.</div>
+<div class="line">This is used to identify which synapse to query</div>
+<div class="line">behind the endpoint, as an endpoint may have</div>
+<div class="line">multiple synapses.</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">STRING</span></code> address [required]</td>
+<td>Synapse ip address.</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">STRING</span></code> port [required]</td>
+<td>Synapse endpoint listening port.</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">STRING</span></code> block_hash [required]</td>
+<td>Hash of latest chain block service definition creation.</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">STRING</span></code> nounce [optional]</td>
+<td>Incrementing nounce.</td>
+</tr>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">STRING</span></code> proof_of_work [optional]</td>
+<td><div class="first last line-block">
+<div class="line">Work hash which ensures service definition creation</div>
+<div class="line">was computationally expensive. Protects the network</div>
+<div class="line">cache from flooding attacks.</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">STRING</span></code> signature [optional]</td>
+<td><div class="first last line-block">
+<div class="line">Public_key signature for this synapse definition.</div>
+<div class="line">Ensures that the connected neuron_key signed this proto.</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</li>
+</ol>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../getting-started/run-multiple-bittensor-instances.html" class="btn btn-neutral float-left" title="Running Multiple Bittensor Instances" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Ala Shaabana, Jacob Steeves, and the Bittensor community
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

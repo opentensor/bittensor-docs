@@ -38,7 +38,13 @@ This is an example model that is set up under :code:`examples/mnist`. You can sp
 
    pip3 install -r requirements.txt
 
-9. You can verify your installation has succeeded by going to one of the examples and running its :code:`main.py` folder.
+9. Install protobufs
+
+.. code-block:: Bash
+   
+   pip3 install -e . 
+
+10. You can verify your installation has succeeded by going to one of the examples and running its :code:`main.py` folder.
 
 .. code-block:: Bash
 
