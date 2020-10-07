@@ -31,7 +31,7 @@ The Bittensor Network
 
 Similarly to its biological counterpart, the Bittensor neuron also exchanges messages with other 
 neurons in the form of `machine knowledge`. A group of these neurons can connect together to form a 
-network of interconnected models that are able to learn form each other. 
+network of interconnected models that are able to learn from each other. 
 
 Bittensor Neuron examples can be found under :code:`examples`. Presently, there are 3 examples: 
 
@@ -55,4 +55,129 @@ Assume we have two neurons as in the figure below, where each neuron contains 3 
 .. figure:: 
     /images/Bittensor.png
 
-    Bird's-eye view of the communication between two Bittensor nodes.
+    Communication between two Bittensor neurons.
+
+Let's also assume that as per the :doc:`getting started </getting-started/run-multiple-bittensor-instances>` guide, we started Neuron 1 first. 
+
+Let's go through a breakdown of what happens when we start a Neuron. You can follow along in the `MNIST code <https://github.com/opentensor/bittensor/blob/master/examples/mnist/main.py#L198>`_.
+
+1. Neuron loads its configuration (set by the command line argumnets) and dataset, then sets up the hyper parameters such as the learning rate, batch size, etc. 
+
+    .. code-block:: Python
+
+        # Additional training params.
+        batch_size_train = 64
+        batch_size_test = 64
+        learning_rate = 0.01
+        momentum = 0.9
+        ...
+        # Load (Train, Test) datasets into memory.
+        train_data = torchvision.datasets.MNIST(root=model_toolbox.data_path, train=True, download=True, transform=transforms.ToTensor())
+        trainloader = torch.utils.data.DataLoader(train_data, batch_size = batch_size_train, shuffle=True, num_workers=2)
+        
+        test_data = torchvision.datasets.MNIST(root=model_toolbox.data_path, train=False, download=True, transform=transforms.ToTensor())
+        testloader = torch.utils.data.DataLoader(test_data, batch_size = batch_size_test, shuffle=False, num_workers=2)
+
+2. Neuron builds the local synapse (this is the model to be trained on the network). 
+
+    .. code-block:: Python
+
+        # Build local synapse to serve on the network.
+        model = MnistSynapse() # Synapses take a config object.
+        model.to( device ) # Send model to device (GPU or CPU)
+
+   where :code:`MnistSynapse` is a class that extends the :code:`Synapse` class. 
+   In true Pytorch fasion, it contains an :code:`__init__` and a :code:`forward()` call. 
+
+3. The Neuron will then build and start the :code:`Metagraph` object. 
+   This object is responsible for connecting to the Blockchain
+   and finding other neurons on the network.
+
+    .. code-block:: Python
+
+        metagraph = bittensor.Metagraph( config )
+        metagraph.subscribe( model ) # Adds the synapse to the metagraph.
+        metagraph.start() # Starts the metagraph gossip threads.
+
+4. The Axon server is built next. This server allows other neurons 
+   (Neuron 2 in this example) to make queries to Neuron 1 through 
+   the Dendrite. It also deploys the synapse model we set up in step 2. 
+
+    .. code-block:: Python
+
+        axon = bittensor.Axon( config )
+        axon.serve( copy.deepcopy(model) )
+        axon.start() # Starts the server background threads. Must be paired with axon.stop().
+
+5. Neuron builds the Dendrite object next. The Dendrite is 
+   responsible for sending dataset batches across the 
+   network to remote synapses.
+
+    .. code-block:: Python
+
+        dendrite = bittensor.Dendrite( config ).to(device)
+
+6. Finally, the Neuron builds the router. The router is 
+   responsible for learning **which** synapse to call. 
+    
+    .. code-block:: Python
+
+        router = bittensor.Router(x_dim = 1024, key_dim = 100, topk = 10)
+
+7. We can set up the optimizer the same way we normally do 
+   with any other Pytorch model. The important piece here is that 
+   we are optimizing both the model parameters **and** the 
+   router's parameters, as we are dealing with two models here. 
+   The Synapse model that we are training, and the router's 
+   model that learns which synapse model to tell the Dendrite 
+   to send a dataset batch to. 
+
+    .. code-block:: Python
+
+        # Build the optimizer.
+        params = list(router.parameters()) + list(model.parameters())
+        optimizer = optim.SGD(params, lr=learning_rate, momentum=momentum)
+
+8. If we have previously saved a Bittensor model 
+   and wish to continue training it, we can load it 
+   back up using the :code:`model_toolbox`. 
+
+    .. code-block:: Python
+
+        # Load previously trained model if it exists
+        if config._hparams.load_model is not None:
+            model, optimizer, epoch, best_test_loss = model_toolbox.load_model(model, config._hparams.load_model, optimizer)
+        
+9. The training loop proceeds as it would with static 
+   training models that we know and love in Pytorch. 
+   However there is one difference now that they are 
+   communicating with each other: we need to actually tell 
+   them to talk to each other during training. Hence, 
+   during the training loop we invoke the following lines: 
+
+    .. code-block:: Python
+
+         # Encode inputs for the router context.
+         context = model.forward_image(images).to(device)
+        
+   This invokes the model for one forward pass of the image inputs through the 
+   :code:`MnistSynapse` model we defined. We then query the network
+   of peers and send them the vector output of this forward pass and the current batch of examples that we are training on. 
+
+    .. code-block:: Python
+
+         # Query the remote network of peers
+         synapses = metagraph.get_synapses( 1000 ) # Returns a list of synapses on the network (max 1000).
+         requests, scores = router.route( synapses, context, images ) # routes inputs to network.
+         responses = dendrite.forward_image( synapses, requests ) # Makes network calls.
+         network = router.join( responses ) # Joins responses based on scores..
+
+   Let's unpack this line by line: 
+    - :code:`metagraph.get_synapses()` will simply query the network, and return a list of synapses that are presently on the network that we can query. Recall that a remote synapse is a model running on a remote neuron. 
+    - :code:`router.route()` will utilize the router model to find which synapses to query that will return the best responses. It will return :code:`requests`: a list of input minibatches to be sent to the remote synapses, and :code:`scores`: a list of scores of the performance of the remote synapses.
+    - :code:`dendrite.forward_image()` will forward the minibatches to the remote synapses, and return their responses -- a vector output of their :code:`forward` call. 
+    - :code:`router.join()` will join the responses of all the synapses together. 
+   
+   **NOTE**: If we are running only one instance of Bittensor with no peers, then this call would simply recursively send the batch and vector output of the forward pass to the instance itself, effectively learning locally as if it's a local learning model.  
+
+    
