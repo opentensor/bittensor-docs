@@ -159,7 +159,9 @@ Let's go through a breakdown of what happens when we start a Neuron. You can fol
 
          # Encode inputs for the router context.
          context = model.forward_image(images).to(device)
-        
+    
+    Note that by :code:`context` here we mean the input coming from the local network, which is a vector output of its forward pass. This same context is used as input for the remote networks. 
+
    This invokes the model for one forward pass of the image inputs through the 
    :code:`MnistSynapse` model we defined. We then query the network
    of peers and send them the vector output of this forward pass and the current batch of examples that we are training on. 
@@ -180,4 +182,24 @@ Let's go through a breakdown of what happens when we start a Neuron. You can fol
    
    **NOTE**: If we are running only one instance of Bittensor with no peers, then this call would simply recursively send the batch and vector output of the forward pass to the instance itself, effectively learning locally as if it's a local learning model.  
 
-    
+10. Now that we have the responses from all the remote synapses, we can call :code:`forward()` on the local model to calculate the following:
+
+    - :code:`loss`: Total loss acumulation to be used by :code:`loss.backward()`.
+    - :code:`local_output`: Output encoding of image inputs produced by using the local distillation model as context rather than the network. 
+    - :code:`local_target`: MNIST Target predictions using student model as context.
+    - :code:`local_target_loss`: MNIST Classification loss computed using the local_output, student model and passed labels.
+    - :code:`network_target`: MNIST Target predictions using the network as context. 
+    - :code:`network_output`: Output encoding of inputs produced by using the network inputs as context to the model rather than the student.
+    - :code:`network_target_loss`: MNIST Classification loss computed using the local_output and passed labels.
+    - :code:`distillation_loss`: Distillation loss produced by the student with respect to the network context.
+
+    Remember that by :code:`context` here we mean the input coming from the remote network of neurons, which is a vector output of their own forward passes. The student distillation model learns to emulate this context from the network as well to increase accuracy and reduce loss. 
+
+11. Finally, let's set the weights of the remote synapses. We first get the weights for list of Synapse endpoints, normalize them by the scores we calculated for the remote synapses, then we set them back. 
+    This process is what allows a Bittensor neuron pick the best remote synapses (or peers) upon the next training iteration. 
+
+    .. code-block:: Python
+
+            weights = metagraph.getweights(synapses).to(device)
+            weights = (0.99) * weights + 0.01 * torch.mean(scores, dim=0)
+            metagraph.setweights(synapses, weights)

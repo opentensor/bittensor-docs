@@ -318,6 +318,7 @@ during the training loop we invoke the following lines:</p>
 <span class="n">context</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">forward_image</span><span class="p">(</span><span class="n">images</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>Note that by <code class="code docutils literal notranslate"><span class="pre">context</span></code> here we mean the input coming from the local network, which is a vector output of its forward pass. This same context is used as input for the remote networks.</p>
 </div></blockquote>
 <p>This invokes the model for one forward pass of the image inputs through the
 <code class="code docutils literal notranslate"><span class="pre">MnistSynapse</span></code> model we defined. We then query the network
@@ -342,6 +343,27 @@ of peers and send them the vector output of this forward pass and the current ba
 </dd>
 </dl>
 <p><strong>NOTE</strong>: If we are running only one instance of Bittensor with no peers, then this call would simply recursively send the batch and vector output of the forward pass to the instance itself, effectively learning locally as if it’s a local learning model.</p>
+</li>
+<li><p class="first">Now that we have the responses from all the remote synapses, we can call <code class="code docutils literal notranslate"><span class="pre">forward()</span></code> on the local model to calculate the following:</p>
+<ul class="simple">
+<li><code class="code docutils literal notranslate"><span class="pre">loss</span></code>: Total loss acumulation to be used by <code class="code docutils literal notranslate"><span class="pre">loss.backward()</span></code>.</li>
+<li><code class="code docutils literal notranslate"><span class="pre">local_output</span></code>: Output encoding of image inputs produced by using the local distillation model as context rather than the network.</li>
+<li><code class="code docutils literal notranslate"><span class="pre">local_target</span></code>: MNIST Target predictions using student model as context.</li>
+<li><code class="code docutils literal notranslate"><span class="pre">local_target_loss</span></code>: MNIST Classification loss computed using the local_output, student model and passed labels.</li>
+<li><code class="code docutils literal notranslate"><span class="pre">network_target</span></code>: MNIST Target predictions using the network as context.</li>
+<li><code class="code docutils literal notranslate"><span class="pre">network_output</span></code>: Output encoding of inputs produced by using the network inputs as context to the model rather than the student.</li>
+<li><code class="code docutils literal notranslate"><span class="pre">network_target_loss</span></code>: MNIST Classification loss computed using the local_output and passed labels.</li>
+<li><code class="code docutils literal notranslate"><span class="pre">distillation_loss</span></code>: Distillation loss produced by the student with respect to the network context.</li>
+</ul>
+<p>Remember that by <code class="code docutils literal notranslate"><span class="pre">context</span></code> here we mean the input coming from the remote network of neurons, which is a vector output of their own forward passes. The student distillation model learns to emulate this context from the network as well to increase accuracy and reduce loss.</p>
+</li>
+<li><p class="first">Finally, let’s set the weights of the remote synapses. We first get the weights for list of Synapse endpoints, normalize them by the scores we calculated for the remote synapses, then we set them back.
+This process is what allows a Bittensor neuron pick the best remote synapses (or peers) upon the next training iteration.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">weights</span> <span class="o">=</span> <span class="n">metagraph</span><span class="o">.</span><span class="n">getweights</span><span class="p">(</span><span class="n">synapses</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">weights</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.99</span><span class="p">)</span> <span class="o">*</span> <span class="n">weights</span> <span class="o">+</span> <span class="mf">0.01</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">metagraph</span><span class="o">.</span><span class="n">setweights</span><span class="p">(</span><span class="n">synapses</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+</pre></div>
+</div>
 </li>
 </ol>
 </div>
