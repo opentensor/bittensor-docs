@@ -13,7 +13,6 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
 
   
   
@@ -90,7 +89,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../getting-started/run-bittensor-via-python.html">Run Bittensor via Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started/run-multiple-bittensor-instances.html">Running Multiple Bittensor Instances</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Bittensor Architecture</span></p>
+<p class="caption"><span class="caption-text">Bittensor</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">gRPC Protocol</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#bittensor-service"><code class="code docutils literal notranslate"><span class="pre">Bittensor</span></code> service.</a></li>
@@ -99,11 +98,12 @@
 <li class="toctree-l2"><a class="reference internal" href="#datatype-enum"><code class="code docutils literal notranslate"><span class="pre">DataType</span></code> enum.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#modality-enum"><code class="code docutils literal notranslate"><span class="pre">Modality</span></code> enum.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#tensormessage-message"><code class="code docutils literal notranslate"><span class="pre">TensorMessage</span></code> message.</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#tensor-message"><code class="code docutils literal notranslate"><span class="pre">Tensor</span></code> message.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1"><code class="code docutils literal notranslate"><span class="pre">Tensor</span></code> message.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#synapse-message"><code class="code docutils literal notranslate"><span class="pre">Synapse</span></code> message.</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="bittensor-architecture.html">Bittensor Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="component-breakdown.html">Bittensor Component Breakdown</a></li>
 </ul>
 
             
@@ -295,7 +295,7 @@ the communications protocol and message types that travel between nodes/instance
 </div></blockquote>
 </div>
 <div class="section" id="tensormessage-message">
-<h2><code class="code docutils literal notranslate"><span class="pre">TensorMessage</span></code> message.<a class="headerlink" href="#tensormessage-message" title="Permalink to this headline">¶</a></h2>
+<span id="tensor-message"></span><h2><code class="code docutils literal notranslate"><span class="pre">TensorMessage</span></code> message.<a class="headerlink" href="#tensormessage-message" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><ul class="simple">
 <li>The primary protobuf message object passed between tensor processing servers.</li>
@@ -370,8 +370,8 @@ the communications protocol and message types that travel between nodes/instance
 </table>
 </div></blockquote>
 </div>
-<div class="section" id="tensor-message">
-<h2><code class="code docutils literal notranslate"><span class="pre">Tensor</span></code> message.<a class="headerlink" href="#tensor-message" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h2><code class="code docutils literal notranslate"><span class="pre">Tensor</span></code> message.<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><ul class="simple">
 <li>A serialized tensor object created using the serializer class.</li>

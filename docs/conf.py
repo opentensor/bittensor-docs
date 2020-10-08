@@ -29,7 +29,7 @@ extensions = [
     'sphinx.ext.todo',
     'sphinx.ext.githubpages',
     'sphinx_rtd_theme',
-    'sphinx.ext.graphviz'
+    'sphinx.ext.autosectionlabel',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -95,3 +95,6 @@ html_context = {
   "conf_py_path": "/docs/",
   "source_suffix": source_suffix,
 }
+
+autosectionlabel_prefix_document = True
+autosectionlabel_maxdepth = 4

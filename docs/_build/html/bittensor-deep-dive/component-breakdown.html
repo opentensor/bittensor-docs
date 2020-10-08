@@ -1,0 +1,336 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Bittensor Component Breakdown &mdash; Bittensor 1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Bittensor Architecture" href="bittensor-architecture.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Bittensor
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/run-bittensor-via-docker.html">Run Bittensor via Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/run-bittensor-via-python.html">Run Bittensor via Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/run-multiple-bittensor-instances.html">Running Multiple Bittensor Instances</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Bittensor</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="grpc-protocol.html">gRPC Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bittensor-architecture.html">Bittensor Architecture</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Bittensor Component Breakdown</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#axon-class">Axon class</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#init-self-config-bittensor-config"><code class="code docutils literal notranslate"><span class="pre">__init__(self,</span> <span class="pre">config:</span> <span class="pre">bittensor.Config)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#del-self"><code class="code docutils literal notranslate"><span class="pre">__del__(self)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#start-self"><code class="code docutils literal notranslate"><span class="pre">start(self)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#stop-self"><code class="code docutils literal notranslate"><span class="pre">_stop(self)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#serve-self"><code class="code docutils literal notranslate"><span class="pre">_serve(self)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2"><code class="code docutils literal notranslate"><span class="pre">serve(self)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#forward-self-request-context"><code class="code docutils literal notranslate"><span class="pre">Forward</span> <span class="pre">(self,</span> <span class="pre">request,</span> <span class="pre">context)</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#dendrite-class">Dendrite class</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#forward-text-forward-image-and-forward-tensor"><code class="code docutils literal notranslate"><span class="pre">forward_text</span></code>, <code class="code docutils literal notranslate"><span class="pre">forward_image</span></code>, and <code class="code docutils literal notranslate"><span class="pre">forward_tensor</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#forward-self-synapses-x-mode"><code class="code docutils literal notranslate"><span class="pre">forward(self,</span> <span class="pre">synapses,</span> <span class="pre">x,</span> <span class="pre">mode)</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Bittensor</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Bittensor Component Breakdown</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/crate/crate-docs-theme/blob/master/docs/bittensor-deep-dive/component-breakdown.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="bittensor-component-breakdown">
+<h1>Bittensor Component Breakdown<a class="headerlink" href="#bittensor-component-breakdown" title="Permalink to this headline">¶</a></h1>
+<p>Bittensor consists of several components that allow neurons to communicate with peers (other neurons)
+and send/receive machine knowledge. This section goes through each component and describes its role in the neuron, its inputs
+, its outputs, and its context within the big picture of the Bittensor network.</p>
+<p>These components can all be found in <a class="reference external" href="https://github.com/opentensor/bittensor/tree/master/bittensor">bittensor/bittensor</a>.</p>
+<div class="section" id="axon-class">
+<h2><a class="reference external" href="https://github.com/opentensor/bittensor/tree/master/bittensor/axon.py">Axon</a> class<a class="headerlink" href="#axon-class" title="Permalink to this headline">¶</a></h2>
+<p>Analogous to the Axon terminal in a biological neuron cell, the axon class is responsible
+for deploying a Synapse instance and receiving machine knowledge from other synapses in the network
+(also called remote synapses, we will be using these terms interchangeably).</p>
+<p>The main job of the Axon class is to process <code class="code docutils literal notranslate"><span class="pre">forward</span></code> and <code class="code docutils literal notranslate"><span class="pre">backward</span></code> requests through a
+set of local synapses. This requests come from remote neurons.</p>
+<div class="section" id="init-self-config-bittensor-config">
+<h3><code class="code docutils literal notranslate"><span class="pre">__init__(self,</span> <span class="pre">config:</span> <span class="pre">bittensor.Config)</span></code><a class="headerlink" href="#init-self-config-bittensor-config" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Initializes the configuration according to arguments passed to <code class="code docutils literal notranslate"><span class="pre">main.py</span></code> in the Neuron.</li>
+<li>Initializes <a class="reference external" href="https://grpc.io/">gRPC</a> server objects using the <code class="code docutils literal notranslate"><span class="pre">config.axon_port</span></code> passed to it.</li>
+<li>Sets up local synapses and the serving <a class="reference external" href="https://github.com/opentensor/bittensor/tree/master/bittensor/axon.py">Axon</a>  thread.</li>
+</ul>
+</div>
+<div class="section" id="del-self">
+<h3><code class="code docutils literal notranslate"><span class="pre">__del__(self)</span></code><a class="headerlink" href="#del-self" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Stops the entire Axon terminal server and deletes local synapses.</li>
+</ul>
+</div>
+<div class="section" id="start-self">
+<h3><code class="code docutils literal notranslate"><span class="pre">start(self)</span></code><a class="headerlink" href="#start-self" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Starts the Axon terminal and the gRPC server.</li>
+</ul>
+</div>
+<div class="section" id="stop-self">
+<h3><code class="code docutils literal notranslate"><span class="pre">_stop(self)</span></code><a class="headerlink" href="#stop-self" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Stop the Axon terminal and the gRPC server.</li>
+</ul>
+</div>
+<div class="section" id="serve-self">
+<h3><code class="code docutils literal notranslate"><span class="pre">_serve(self)</span></code><a class="headerlink" href="#serve-self" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Start the gRPC server.</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h3><code class="code docutils literal notranslate"><span class="pre">serve(self)</span></code><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Add a synapse to the set of synapses presently being served by this Axon terminal.</li>
+<li>Creates a new bittensor_pb2.Synapse proto and adds it to the list of local synapses.</li>
+</ul>
+</div>
+<div class="section" id="forward-self-request-context">
+<h3><code class="code docutils literal notranslate"><span class="pre">Forward</span> <span class="pre">(self,</span> <span class="pre">request,</span> <span class="pre">context)</span></code><a class="headerlink" href="#forward-self-request-context" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="code docutils literal notranslate"><span class="pre">Forward</span></code> call takes the <a class="reference internal" href="grpc-protocol.html#tensor-message"><span class="std std-ref">TensorMessage</span></a> request and looks up the local synapse that this request
+is targetting. In this context, the local synapse is a synapse belonging to this neuron. Once it has found the synapse,
+it deserializes the Tensor in the <a class="reference internal" href="grpc-protocol.html#tensor-message"><span class="std std-ref">TensorMessage</span></a> and makes a <code class="code docutils literal notranslate"><span class="pre">forward</span></code> call on the target synapse. It then
+serializes the local synapse’s response (a vector of the output of its last layer) and returns it.</p>
+<dl class="docutils">
+<dt><strong>Inputs</strong>:</dt>
+<dd><ul class="first last simple">
+<li><a class="reference internal" href="grpc-protocol.html#tensor-message"><span class="std std-ref">TensorMessage request</span></a> coming from a remote synapse.</li>
+<li><code class="code docutils literal notranslate"><span class="pre">context</span></code> coming from a remote neuron.</li>
+</ul>
+</dd>
+<dt><strong>Outputs</strong>:</dt>
+<dd><ul class="first last simple">
+<li>Serialized response of the local synapse.</li>
+</ul>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="dendrite-class">
+<h2><a class="reference external" href="https://github.com/opentensor/bittensor/tree/master/bittensor/dendrite.py">Dendrite</a> class<a class="headerlink" href="#dendrite-class" title="Permalink to this headline">¶</a></h2>
+<p>Also analogous to the Dendrite in a biological neuron cell, the Dendrite class is responsible for
+sending dataset batches across the network to remote synapses.</p>
+<div class="section" id="forward-text-forward-image-and-forward-tensor">
+<h3><code class="code docutils literal notranslate"><span class="pre">forward_text</span></code>, <code class="code docutils literal notranslate"><span class="pre">forward_image</span></code>, and <code class="code docutils literal notranslate"><span class="pre">forward_tensor</span></code><a class="headerlink" href="#forward-text-forward-image-and-forward-tensor" title="Permalink to this headline">¶</a></h3>
+<p>As the function name implies, each of these functions is responsible for forwarding a different modality
+across the <a class="reference external" href="https://grpc.io/">gRPC</a> network to peer neurons.</p>
+<p>Each function takes as input a list of peer synapses and a list of torch tensors that need to be sent to the peer.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">forward_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">synapses</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">bittensor_pb2</span><span class="o">.</span><span class="n">Synapse</span><span class="p">],</span> <span class="n">x</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot; forward tensor processes &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">synapses</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">bittensor_pb2</span><span class="o">.</span><span class="n">Modality</span><span class="o">.</span><span class="n">TEXT</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">forward_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">synapses</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">bittensor_pb2</span><span class="o">.</span><span class="n">Synapse</span><span class="p">],</span> <span class="n">x</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span> <span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot; forward tensor processes &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">synapses</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">bittensor_pb2</span><span class="o">.</span><span class="n">Modality</span><span class="o">.</span><span class="n">IMAGE</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">forward_tensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">synapses</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">bittensor_pb2</span><span class="o">.</span><span class="n">Synapse</span><span class="p">],</span> <span class="n">x</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span> <span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot; forward tensor processes &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">synapses</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">bittensor_pb2</span><span class="o">.</span><span class="n">Modality</span><span class="o">.</span><span class="n">TENSOR</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="forward-self-synapses-x-mode">
+<h3><code class="code docutils literal notranslate"><span class="pre">forward(self,</span> <span class="pre">synapses,</span> <span class="pre">x,</span> <span class="pre">mode)</span></code><a class="headerlink" href="#forward-self-synapses-x-mode" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="bittensor-architecture.html" class="btn btn-neutral float-left" title="Bittensor Architecture" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Ala Shaabana, Jacob Steeves, and the Bittensor community
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

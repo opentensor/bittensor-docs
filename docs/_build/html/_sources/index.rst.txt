@@ -30,4 +30,5 @@ within a network of intelligence systems.
    
    /bittensor-deep-dive/grpc-protocol
    /bittensor-deep-dive/bittensor-architecture
+   /bittensor-deep-dive/component-breakdown
 

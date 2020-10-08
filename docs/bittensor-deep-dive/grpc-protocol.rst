@@ -54,6 +54,7 @@ the communications protocol and message types that travel between nodes/instance
     - Modality of the message (TEXT, IMAGE, TENSOR).
     - Described `here <https://github.com/opentensor/bittensor/blob/master/bittensor/bittensor.proto#L239>`__.
 
+.. _tensor-message: 
 
 :code:`TensorMessage` message.
 -------------------------------
