@@ -124,11 +124,19 @@
 <li class="toctree-l3"><a class="reference internal" href="#id4"><code class="code docutils literal notranslate"><span class="pre">stop</span> <span class="pre">(self)</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#do-gossip-self"><code class="code docutils literal notranslate"><span class="pre">do_gossip</span> <span class="pre">(self)</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#do-clean-self-ttl"><code class="code docutils literal notranslate"><span class="pre">do_clean</span> <span class="pre">(self,</span> <span class="pre">ttl)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sink-self-request"><code class="code docutils literal notranslate"><span class="pre">_sink</span> <span class="pre">(self,</span> <span class="pre">request)</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#get-peers-self-n"><code class="code docutils literal notranslate"><span class="pre">get_peers(self,</span> <span class="pre">n)</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#get-synapses-self-n"><code class="code docutils literal notranslate"><span class="pre">get_synapses(self,</span> <span class="pre">n)</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#getweights-self-synapses"><code class="code docutils literal notranslate"><span class="pre">getweights(self,</span> <span class="pre">synapses)</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#setweights-self-synapses"><code class="code docutils literal notranslate"><span class="pre">setweights(self,</span> <span class="pre">synapses)</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#subscribe-self-synapse"><code class="code docutils literal notranslate"><span class="pre">subscribe(self,</span> <span class="pre">synapse)</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#synapse-class">Synapse class</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#init-self"><code class="code docutils literal notranslate"><span class="pre">__init__</span> <span class="pre">(self)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#forward-text-self-forward-image-self-and-forward-tensor-self"><code class="code docutils literal notranslate"><span class="pre">forward_text</span> <span class="pre">(self)</span></code>, <code class="code docutils literal notranslate"><span class="pre">forward_image</span> <span class="pre">(self)</span></code>, and <code class="code docutils literal notranslate"><span class="pre">forward_tensor</span> <span class="pre">(self)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#call-forward-self-inputs-modality"><code class="code docutils literal notranslate"><span class="pre">call_forward</span> <span class="pre">(self,</span> <span class="pre">inputs,</span> <span class="pre">modality)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#call-backward-self-inputs-grads"><code class="code docutils literal notranslate"><span class="pre">call_backward</span> <span class="pre">(self,</span> <span class="pre">inputs,</span> <span class="pre">grads)</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -226,11 +234,6 @@ set of local synapses. This requests come from remote neurons.</p>
 <ul class="simple">
 <li>Stops the entire Axon terminal server and deletes local synapses.</li>
 </ul>
-<blockquote id="start1">
-<div><ul class="simple">
-<li>Starts the Axon terminal and the gRPC server.</li>
-</ul>
-</div></blockquote>
 </div>
 <div class="section" id="stop-self">
 <h3><code class="code docutils literal notranslate"><span class="pre">_stop</span> <span class="pre">(self)</span></code><a class="headerlink" href="#stop-self" title="Permalink to this headline">¶</a></h3>
@@ -435,7 +438,7 @@ at the moment this function does not apply the gradients to the Synapse. Note th
 </div>
 <div class="section" id="do-gossip-self">
 <h3><code class="code docutils literal notranslate"><span class="pre">do_gossip</span> <span class="pre">(self)</span></code><a class="headerlink" href="#do-gossip-self" title="Permalink to this headline">¶</a></h3>
-<p>Sends a gossip query to a random peer and <a class="reference internal" href="#sink"><span class="std std-ref">“sinks”</span></a> their response into the metagraph.</p>
+<p>Sends a gossip query to a random peer and records their response into the metagraph via a <code class="code docutils literal notranslate"><span class="pre">sink()</span></code> call.</p>
 </div>
 <div class="section" id="do-clean-self-ttl">
 <h3><code class="code docutils literal notranslate"><span class="pre">do_clean</span> <span class="pre">(self,</span> <span class="pre">ttl)</span></code><a class="headerlink" href="#do-clean-self-ttl" title="Permalink to this headline">¶</a></h3>
@@ -452,8 +455,10 @@ at the moment this function does not apply the gradients to the Synapse. Note th
 </ul>
 </dd>
 </dl>
-<blockquote id="sink">
-<div>Records a peer’s gossip request to the local neurons list of synapses and peers, and sets its latest heartbeat time.</div></blockquote>
+</div>
+<div class="section" id="sink-self-request">
+<h3><code class="code docutils literal notranslate"><span class="pre">_sink</span> <span class="pre">(self,</span> <span class="pre">request)</span></code><a class="headerlink" href="#sink-self-request" title="Permalink to this headline">¶</a></h3>
+<p>Records a peer’s gossip request to the local neurons list of synapses and peers, and sets its latest heartbeat time.</p>
 </div>
 <div class="section" id="get-peers-self-n">
 <h3><code class="code docutils literal notranslate"><span class="pre">get_peers(self,</span> <span class="pre">n)</span></code><a class="headerlink" href="#get-peers-self-n" title="Permalink to this headline">¶</a></h3>
@@ -532,6 +537,64 @@ at the moment this function does not apply the gradients to the Synapse. Note th
 <dt><strong>Outputs</strong>:</dt>
 <dd><ul class="first last simple">
 <li><code class="code docutils literal notranslate"><span class="pre">None</span></code></li>
+</ul>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="synapse-class">
+<h2><a class="reference external" href="https://github.com/opentensor/bittensor/tree/master/bittensor/synapse.py">Synapse</a> class<a class="headerlink" href="#synapse-class" title="Permalink to this headline">¶</a></h2>
+<p>This is the <strong>superclass</strong> of every custom deep learning model that users will write on Bittensor. More specifically,
+each deep learning model (read: neuron, or miner) will extend this class to gain the capabilities of communicating
+with other bittensor neurons.</p>
+<div class="section" id="init-self">
+<h3><code class="code docutils literal notranslate"><span class="pre">__init__</span> <span class="pre">(self)</span></code><a class="headerlink" href="#init-self" title="Permalink to this headline">¶</a></h3>
+<p>Initializes the <a class="reference internal" href="grpc-protocol.html#tensor-message"><span class="std std-ref">Synapse public key</span></a> and identifies whether the current machine is cuda-capable (i.e. can we
+train on the GPU?).</p>
+</div>
+<div class="section" id="forward-text-self-forward-image-self-and-forward-tensor-self">
+<h3><code class="code docutils literal notranslate"><span class="pre">forward_text</span> <span class="pre">(self)</span></code>, <code class="code docutils literal notranslate"><span class="pre">forward_image</span> <span class="pre">(self)</span></code>, and <code class="code docutils literal notranslate"><span class="pre">forward_tensor</span> <span class="pre">(self)</span></code><a class="headerlink" href="#forward-text-self-forward-image-self-and-forward-tensor-self" title="Permalink to this headline">¶</a></h3>
+<p>These methods are not implemented in this class, but are defined as contractual methods where one (or all) of them should be implemented by the user and
+their model they are building (See examples like <a class="reference external" href="https://github.com/opentensor/bittensor/tree/master/examples/mnist">MNIST</a>).</p>
+<dl class="docutils">
+<dt><strong>Inputs</strong>:</dt>
+<dd><ul class="first last simple">
+<li><code class="code docutils literal notranslate"><span class="pre">torch.Tensor</span> <span class="pre">inputs</span></code> : The batch of data to be sent through the <code class="code docutils literal notranslate"><span class="pre">forward()</span></code> call of the custom model.</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="call-forward-self-inputs-modality">
+<h3><code class="code docutils literal notranslate"><span class="pre">call_forward</span> <span class="pre">(self,</span> <span class="pre">inputs,</span> <span class="pre">modality)</span></code><a class="headerlink" href="#call-forward-self-inputs-modality" title="Permalink to this headline">¶</a></h3>
+<p>Apply forward pass to the bittensor.synapse given inputs and modality. The modality passed to this function determines whether it calls
+<code class="code docutils literal notranslate"><span class="pre">forward_text</span> <span class="pre">(self)</span></code>, <code class="code docutils literal notranslate"><span class="pre">forward_image</span> <span class="pre">(self)</span></code>, or <code class="code docutils literal notranslate"><span class="pre">forward_tensor</span> <span class="pre">(self)</span></code>. Therefore, one of them <strong>must</strong> be implemented in the subclass (custom) model.</p>
+<dl class="docutils">
+<dt><strong>Inputs</strong>:</dt>
+<dd><ul class="first last simple">
+<li><code class="code docutils literal notranslate"><span class="pre">Object</span> <span class="pre">inputs</span></code> : The batch of data to be sent through the <code class="code docutils literal notranslate"><span class="pre">forward()</span></code> call of the custom model.</li>
+<li><code class="code docutils literal notranslate"><span class="pre">modality</span></code> : The modality of the data being sent.</li>
+</ul>
+</dd>
+<dt><strong>Outputs</strong>:</dt>
+<dd><ul class="first last simple">
+<li><code class="code docutils literal notranslate"><span class="pre">torch.Tensor</span> <span class="pre">Outputs</span></code> : The output of the <code class="code docutils literal notranslate"><span class="pre">forward()</span></code> call of the model.</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="call-backward-self-inputs-grads">
+<h3><code class="code docutils literal notranslate"><span class="pre">call_backward</span> <span class="pre">(self,</span> <span class="pre">inputs,</span> <span class="pre">grads)</span></code><a class="headerlink" href="#call-backward-self-inputs-grads" title="Permalink to this headline">¶</a></h3>
+<p>Apply a backward pass to the synapse given grads and inputs. Presently, this only returns a tensor of zeros as it is not being used.</p>
+<dl class="docutils">
+<dt><strong>Inputs</strong>:</dt>
+<dd><ul class="first last simple">
+<li><code class="code docutils literal notranslate"><span class="pre">Object</span> <span class="pre">inputs</span></code> : The batch of data to be sent through the <code class="code docutils literal notranslate"><span class="pre">forward()</span></code> call of the custom model.</li>
+<li><code class="code docutils literal notranslate"><span class="pre">grads</span></code> : Gradients of the remote synapses.</li>
+</ul>
+</dd>
+<dt><strong>Outputs</strong>:</dt>
+<dd><ul class="first last simple">
+<li><code class="code docutils literal notranslate"><span class="pre">torch.zeros((1,1))</span></code> : A tensor of zeros.</li>
 </ul>
 </dd>
 </dl>

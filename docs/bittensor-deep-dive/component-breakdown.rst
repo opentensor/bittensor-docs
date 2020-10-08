@@ -31,7 +31,6 @@ set of local synapses. This requests come from remote neurons.
 - Stops the entire Axon terminal server and deletes local synapses. 
 
 .. _start1:
-
     :code:`start (self)`
     ++++++++++++++++++++++
     - Starts the Axon terminal and the gRPC server.
@@ -198,7 +197,7 @@ Stops the gossip thread. This is typically called at the end of Bittensor's exec
 
 :code:`do_gossip (self)`
 +++++++++++++++++++++++++++++++++++
-Sends a gossip query to a random peer and :ref:`"sinks" <sink>` their response into the metagraph. 
+Sends a gossip query to a random peer and records their response into the metagraph via a :code:`sink()` call.
 
 :code:`do_clean (self, ttl)`
 +++++++++++++++++++++++++++++++++++++++++++
@@ -210,12 +209,10 @@ Checks whether a peer hasn't sent a heart beat signal in a given time (i.e. time
 **Outputs**:
     - :code:`None`
 
-.. _sink:
 
-    :code:`_sink (self, request)`
-    ++++++++++++++++++++++++++++++++++++++++++
-
-    Records a peer's gossip request to the local neurons list of synapses and peers, and sets its latest heartbeat time. 
+:code:`_sink (self, request)`
+++++++++++++++++++++++++++++++++++++++++++
+Records a peer's gossip request to the local neurons list of synapses and peers, and sets its latest heartbeat time. 
 
 :code:`get_peers(self, n)`
 ++++++++++++++++++++++++++++
@@ -268,3 +265,48 @@ Subscribes a synapse class object to the neuron's metagraph.
 
 **Outputs**:
     - :code:`None`
+
+`Synapse <https://github.com/opentensor/bittensor/tree/master/bittensor/synapse.py>`_ class 
+------------------------------------------------------------------------------------------------
+This is the **superclass** of every custom deep learning model that users will write on Bittensor. More specifically,
+each deep learning model (read: neuron, or miner) will extend this class to gain the capabilities of communicating 
+with other bittensor neurons. 
+
+
+:code:`__init__ (self)`
++++++++++++++++++++++++++++++++++++
+Initializes the :ref:`Synapse public key <tensor-message>` and identifies whether the current machine is cuda-capable (i.e. can we
+train on the GPU?).
+
+
+:code:`forward_text (self)`, :code:`forward_image (self)`, and :code:`forward_tensor (self)`
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+These methods are not implemented in this class, but are defined as contractual methods where one (or all) of them should be implemented by the user and
+their model they are building (See examples like `MNIST <https://github.com/opentensor/bittensor/tree/master/examples/mnist>`_).
+
+**Inputs**:
+    - :code:`torch.Tensor inputs` : The batch of data to be sent through the :code:`forward()` call of the custom model.
+
+:code:`call_forward (self, inputs, modality)`
+++++++++++++++++++++++++++++++++++++++++++++++++
+Apply forward pass to the bittensor.synapse given inputs and modality. The modality passed to this function determines whether it calls
+:code:`forward_text (self)`, :code:`forward_image (self)`, or :code:`forward_tensor (self)`. Therefore, one of them **must** be implemented in the subclass (custom) model. 
+
+**Inputs**:
+    - :code:`Object inputs` : The batch of data to be sent through the :code:`forward()` call of the custom model.
+    - :code:`modality` : The modality of the data being sent.
+
+**Outputs**:
+    - :code:`torch.Tensor Outputs` : The output of the :code:`forward()` call of the model. 
+
+:code:`call_backward (self, inputs, grads)`
+++++++++++++++++++++++++++++++++++++++++++++++++
+Apply a backward pass to the synapse given grads and inputs. Presently, this only returns a tensor of zeros as it is not being used. 
+
+**Inputs**:
+    - :code:`Object inputs` : The batch of data to be sent through the :code:`forward()` call of the custom model.
+    - :code:`grads` : Gradients of the remote synapses.
+
+**Outputs**:
+    - :code:`torch.zeros((1,1))` : A tensor of zeros. 
+
