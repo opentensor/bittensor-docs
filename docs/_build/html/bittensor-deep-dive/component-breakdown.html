@@ -94,18 +94,41 @@
 <li class="toctree-l1"><a class="reference internal" href="bittensor-architecture.html">Bittensor Architecture</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Bittensor Component Breakdown</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#axon-class">Axon class</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#init-self-config-bittensor-config"><code class="code docutils literal notranslate"><span class="pre">__init__(self,</span> <span class="pre">config:</span> <span class="pre">bittensor.Config)</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#del-self"><code class="code docutils literal notranslate"><span class="pre">__del__(self)</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#start-self"><code class="code docutils literal notranslate"><span class="pre">start(self)</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#stop-self"><code class="code docutils literal notranslate"><span class="pre">_stop(self)</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#serve-self"><code class="code docutils literal notranslate"><span class="pre">_serve(self)</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2"><code class="code docutils literal notranslate"><span class="pre">serve(self)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#init-self-config-bittensor-config"><code class="code docutils literal notranslate"><span class="pre">__init__</span> <span class="pre">(self,</span> <span class="pre">config:</span> <span class="pre">bittensor.Config)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#del-self"><code class="code docutils literal notranslate"><span class="pre">__del__</span> <span class="pre">(self)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#stop-self"><code class="code docutils literal notranslate"><span class="pre">_stop</span> <span class="pre">(self)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#serve-self"><code class="code docutils literal notranslate"><span class="pre">_serve</span> <span class="pre">(self)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2"><code class="code docutils literal notranslate"><span class="pre">serve</span> <span class="pre">(self)</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#forward-self-request-context"><code class="code docutils literal notranslate"><span class="pre">Forward</span> <span class="pre">(self,</span> <span class="pre">request,</span> <span class="pre">context)</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#dendrite-class">Dendrite class</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#forward-text-forward-image-and-forward-tensor"><code class="code docutils literal notranslate"><span class="pre">forward_text</span></code>, <code class="code docutils literal notranslate"><span class="pre">forward_image</span></code>, and <code class="code docutils literal notranslate"><span class="pre">forward_tensor</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#forward-self-synapses-x-mode"><code class="code docutils literal notranslate"><span class="pre">forward(self,</span> <span class="pre">synapses,</span> <span class="pre">x,</span> <span class="pre">mode)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#forward-self-synapses-x-mode"><code class="code docutils literal notranslate"><span class="pre">forward</span> <span class="pre">(self,</span> <span class="pre">synapses,</span> <span class="pre">x,</span> <span class="pre">mode)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#remotesynapse-class"><code class="code docutils literal notranslate"><span class="pre">RemoteSynapse</span></code> class</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#init-self-synapses-config"><code class="code docutils literal notranslate"><span class="pre">__init__</span> <span class="pre">(self,</span> <span class="pre">synapses,</span> <span class="pre">config)</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#forward-self-object-mode"><code class="code docutils literal notranslate"><span class="pre">forward</span> <span class="pre">(self,</span> <span class="pre">object,</span> <span class="pre">mode)</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#remotemodulecall-class"><code class="code docutils literal notranslate"><span class="pre">_RemoteModuleCall</span></code> class</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#forward-ctx-remotesynapse-dummy-inputs-mode"><code class="code docutils literal notranslate"><span class="pre">forward</span> <span class="pre">(ctx,</span> <span class="pre">RemoteSynapse,</span> <span class="pre">dummy,</span> <span class="pre">inputs,</span> <span class="pre">mode)</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#backward-ctx-grads"><code class="code docutils literal notranslate"><span class="pre">backward</span> <span class="pre">(ctx,</span> <span class="pre">grads)</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#metagraph-class">Metagraph class</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#init-self-config"><code class="code docutils literal notranslate"><span class="pre">__init__(self,</span> <span class="pre">config)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#start-self"><code class="code docutils literal notranslate"><span class="pre">start</span> <span class="pre">(self)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#update-self"><code class="code docutils literal notranslate"><span class="pre">update(self)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4"><code class="code docutils literal notranslate"><span class="pre">stop</span> <span class="pre">(self)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#do-gossip-self"><code class="code docutils literal notranslate"><span class="pre">do_gossip</span> <span class="pre">(self)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#do-clean-self-ttl"><code class="code docutils literal notranslate"><span class="pre">do_clean</span> <span class="pre">(self,</span> <span class="pre">ttl)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-peers-self-n"><code class="code docutils literal notranslate"><span class="pre">get_peers(self,</span> <span class="pre">n)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-synapses-self-n"><code class="code docutils literal notranslate"><span class="pre">get_synapses(self,</span> <span class="pre">n)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getweights-self-synapses"><code class="code docutils literal notranslate"><span class="pre">getweights(self,</span> <span class="pre">synapses)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#setweights-self-synapses"><code class="code docutils literal notranslate"><span class="pre">setweights(self,</span> <span class="pre">synapses)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#subscribe-self-synapse"><code class="code docutils literal notranslate"><span class="pre">subscribe(self,</span> <span class="pre">synapse)</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -191,7 +214,7 @@ for deploying a Synapse instance and receiving machine knowledge from other syna
 <p>The main job of the Axon class is to process <code class="code docutils literal notranslate"><span class="pre">forward</span></code> and <code class="code docutils literal notranslate"><span class="pre">backward</span></code> requests through a
 set of local synapses. This requests come from remote neurons.</p>
 <div class="section" id="init-self-config-bittensor-config">
-<h3><code class="code docutils literal notranslate"><span class="pre">__init__(self,</span> <span class="pre">config:</span> <span class="pre">bittensor.Config)</span></code><a class="headerlink" href="#init-self-config-bittensor-config" title="Permalink to this headline">¶</a></h3>
+<h3><code class="code docutils literal notranslate"><span class="pre">__init__</span> <span class="pre">(self,</span> <span class="pre">config:</span> <span class="pre">bittensor.Config)</span></code><a class="headerlink" href="#init-self-config-bittensor-config" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Initializes the configuration according to arguments passed to <code class="code docutils literal notranslate"><span class="pre">main.py</span></code> in the Neuron.</li>
 <li>Initializes <a class="reference external" href="https://grpc.io/">gRPC</a> server objects using the <code class="code docutils literal notranslate"><span class="pre">config.axon_port</span></code> passed to it.</li>
@@ -199,31 +222,30 @@ set of local synapses. This requests come from remote neurons.</p>
 </ul>
 </div>
 <div class="section" id="del-self">
-<h3><code class="code docutils literal notranslate"><span class="pre">__del__(self)</span></code><a class="headerlink" href="#del-self" title="Permalink to this headline">¶</a></h3>
+<span id="del1"></span><h3><code class="code docutils literal notranslate"><span class="pre">__del__</span> <span class="pre">(self)</span></code><a class="headerlink" href="#del-self" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Stops the entire Axon terminal server and deletes local synapses.</li>
 </ul>
-</div>
-<div class="section" id="start-self">
-<h3><code class="code docutils literal notranslate"><span class="pre">start(self)</span></code><a class="headerlink" href="#start-self" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
+<blockquote id="start1">
+<div><ul class="simple">
 <li>Starts the Axon terminal and the gRPC server.</li>
 </ul>
+</div></blockquote>
 </div>
 <div class="section" id="stop-self">
-<h3><code class="code docutils literal notranslate"><span class="pre">_stop(self)</span></code><a class="headerlink" href="#stop-self" title="Permalink to this headline">¶</a></h3>
+<h3><code class="code docutils literal notranslate"><span class="pre">_stop</span> <span class="pre">(self)</span></code><a class="headerlink" href="#stop-self" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Stop the Axon terminal and the gRPC server.</li>
 </ul>
 </div>
 <div class="section" id="serve-self">
-<h3><code class="code docutils literal notranslate"><span class="pre">_serve(self)</span></code><a class="headerlink" href="#serve-self" title="Permalink to this headline">¶</a></h3>
+<h3><code class="code docutils literal notranslate"><span class="pre">_serve</span> <span class="pre">(self)</span></code><a class="headerlink" href="#serve-self" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Start the gRPC server.</li>
 </ul>
 </div>
 <div class="section" id="id2">
-<h3><code class="code docutils literal notranslate"><span class="pre">serve(self)</span></code><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<h3><code class="code docutils literal notranslate"><span class="pre">serve</span> <span class="pre">(self)</span></code><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Add a synapse to the set of synapses presently being served by this Axon terminal.</li>
 <li>Creates a new bittensor_pb2.Synapse proto and adds it to the list of local synapses.</li>
@@ -239,7 +261,7 @@ serializes the local synapse’s response (a vector of the output of its last la
 <dt><strong>Inputs</strong>:</dt>
 <dd><ul class="first last simple">
 <li><a class="reference internal" href="grpc-protocol.html#tensor-message"><span class="std std-ref">TensorMessage request</span></a> coming from a remote synapse.</li>
-<li><code class="code docutils literal notranslate"><span class="pre">context</span></code> coming from a remote neuron.</li>
+<li><code class="code docutils literal notranslate"><span class="pre">congrpc.ServicerContext</span> <span class="pre">context</span></code> : coming from a remote neuron.</li>
 </ul>
 </dd>
 <dt><strong>Outputs</strong>:</dt>
@@ -258,7 +280,8 @@ sending dataset batches across the network to remote synapses.</p>
 <h3><code class="code docutils literal notranslate"><span class="pre">forward_text</span></code>, <code class="code docutils literal notranslate"><span class="pre">forward_image</span></code>, and <code class="code docutils literal notranslate"><span class="pre">forward_tensor</span></code><a class="headerlink" href="#forward-text-forward-image-and-forward-tensor" title="Permalink to this headline">¶</a></h3>
 <p>As the function name implies, each of these functions is responsible for forwarding a different modality
 across the <a class="reference external" href="https://grpc.io/">gRPC</a> network to peer neurons.</p>
-<p>Each function takes as input a list of peer synapses and a list of torch tensors that need to be sent to the peer.</p>
+<p>Each function takes as input a list of peer synapses and a list of torch tensors that need to be sent to the peer. The list
+of peer synapses can be retrieved with a call to <code class="code docutils literal notranslate"><span class="pre">metagraph.get_synapses()</span></code> as described in <a class="reference internal" href="bittensor-architecture.html#bittensor-network"><span class="std std-ref">Bittensor Architecture</span></a>.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">forward_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">synapses</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">bittensor_pb2</span><span class="o">.</span><span class="n">Synapse</span><span class="p">],</span> <span class="n">x</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot; forward tensor processes &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">synapses</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">bittensor_pb2</span><span class="o">.</span><span class="n">Modality</span><span class="o">.</span><span class="n">TEXT</span><span class="p">)</span>
@@ -274,7 +297,244 @@ across the <a class="reference external" href="https://grpc.io/">gRPC</a> networ
 </div>
 </div>
 <div class="section" id="forward-self-synapses-x-mode">
-<h3><code class="code docutils literal notranslate"><span class="pre">forward(self,</span> <span class="pre">synapses,</span> <span class="pre">x,</span> <span class="pre">mode)</span></code><a class="headerlink" href="#forward-self-synapses-x-mode" title="Permalink to this headline">¶</a></h3>
+<h3><code class="code docutils literal notranslate"><span class="pre">forward</span> <span class="pre">(self,</span> <span class="pre">synapses,</span> <span class="pre">x,</span> <span class="pre">mode)</span></code><a class="headerlink" href="#forward-self-synapses-x-mode" title="Permalink to this headline">¶</a></h3>
+<p>The main functionality behind the Dendrite component of Bittensor, the <code class="code docutils literal notranslate"><span class="pre">forward()</span></code> call forwards mini-batches of the dataset
+by invoking <code class="code docutils literal notranslate"><span class="pre">_RemoteModuleCall</span></code> out to the target remote synapses and returns their results.</p>
+<dl class="docutils">
+<dt><strong>Inputs</strong>:</dt>
+<dd><ul class="first last simple">
+<li><code class="code docutils literal notranslate"><span class="pre">List[bittensor_pb2.Synapse]</span> <span class="pre">synapses</span></code> : A list of remote synapses running in remote neurons.</li>
+<li><code class="code docutils literal notranslate"><span class="pre">List[</span> <span class="pre">object</span> <span class="pre">]</span> <span class="pre">x</span></code> : A list of objects to be sent through gRPC to the target remote synapses.</li>
+<li><code class="code docutils literal notranslate"><span class="pre">bittensor_pb2.Modality</span> <span class="pre">mode</span></code> : Modality of the data being sent (i.e. Text, Image, etc.)</li>
+</ul>
+</dd>
+<dt><strong>Outputs</strong>:</dt>
+<dd><ul class="first last simple">
+<li>The response of each remote synapse. Given that each minibatch runs through the remote synapse’s local model, the output back
+is a vector output of that remote synapse’s <code class="code docutils literal notranslate"><span class="pre">forward()</span></code> call.</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="remotesynapse-class">
+<h3><code class="code docutils literal notranslate"><span class="pre">RemoteSynapse</span></code> class<a class="headerlink" href="#remotesynapse-class" title="Permalink to this headline">¶</a></h3>
+<p>This class bundles a grpc connection to a remote neuron as a standard auto-grad torch.nn.Module. Making it possible to send data to
+that neuron and even calculate its partial derivative on a backwards pass.</p>
+<div class="section" id="init-self-synapses-config">
+<h4><code class="code docutils literal notranslate"><span class="pre">__init__</span> <span class="pre">(self,</span> <span class="pre">synapses,</span> <span class="pre">config)</span></code><a class="headerlink" href="#init-self-synapses-config" title="Permalink to this headline">¶</a></h4>
+<p>This function sets up the synapse’s remote address and a gRPC channel for communication.</p>
+<dl class="docutils">
+<dt><strong>Inputs</strong>:</dt>
+<dd><ul class="first last simple">
+<li><code class="code docutils literal notranslate"><span class="pre">bittensor_pb2.Synapse</span> <span class="pre">synapse</span></code>: The target remote synapse to which we are bundling a gRPC connection.</li>
+<li><code class="code docutils literal notranslate"><span class="pre">bittensor.Config</span> <span class="pre">config</span></code> : Run configuration of the local neuron.</li>
+</ul>
+</dd>
+<dt><strong>Outputs</strong>:</dt>
+<dd><ul class="first last simple">
+<li><code class="code docutils literal notranslate"><span class="pre">None</span></code></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="forward-self-object-mode">
+<h4><code class="code docutils literal notranslate"><span class="pre">forward</span> <span class="pre">(self,</span> <span class="pre">object,</span> <span class="pre">mode)</span></code><a class="headerlink" href="#forward-self-object-mode" title="Permalink to this headline">¶</a></h4>
+<p>Makes a <code class="code docutils literal notranslate"><span class="pre">_RemoteModuleCall</span></code> to send the batch of inputs over to the remote synapse.</p>
+<dl class="docutils">
+<dt><strong>Inputs</strong>:</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt><code class="code docutils literal notranslate"><span class="pre">Object</span> <span class="pre">inputs</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">The mini-batch of data to be sent to the remote synapse. Note that it is of type <code class="code docutils literal notranslate"><span class="pre">object</span></code> as</span></dt>
+<dd><p class="first last">it can be of type string or image data. More data types will be integrated in later versions.</p>
+</dd>
+</dl>
+</li>
+<li><p class="first"><code class="code docutils literal notranslate"><span class="pre">mode</span></code> : The modality of the data being sent.</p>
+</li>
+</ul>
+</dd>
+<dt><strong>Outputs</strong></dt>
+<dd><ul class="first last simple">
+<li><code class="code docutils literal notranslate"><span class="pre">torch.Tensor</span> <span class="pre">outputs</span></code> : A Tensor of outputs from the remote synapses.</li>
+</ul>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="remotemodulecall-class">
+<h3><code class="code docutils literal notranslate"><span class="pre">_RemoteModuleCall</span></code> class<a class="headerlink" href="#remotemodulecall-class" title="Permalink to this headline">¶</a></h3>
+<p>This class is responsible for invoking the actual stub to call remote synapses. As an Autograd differentiable function, the forward
+call passes tensors, while the backward pass computes the gradients to get the partial derivative of the remote synapses’ output.</p>
+<div class="section" id="forward-ctx-remotesynapse-dummy-inputs-mode">
+<h4><code class="code docutils literal notranslate"><span class="pre">forward</span> <span class="pre">(ctx,</span> <span class="pre">RemoteSynapse,</span> <span class="pre">dummy,</span> <span class="pre">inputs,</span> <span class="pre">mode)</span></code><a class="headerlink" href="#forward-ctx-remotesynapse-dummy-inputs-mode" title="Permalink to this headline">¶</a></h4>
+<p>This call passes tensors to the remote synapse. Note that it also takes a <code class="code docutils literal notranslate"><span class="pre">dummy</span></code> tensor to prevent torch from excluding the synapse from backward if no other inputs require grad.
+This method first serializes the inputs, sends them across the wire, then deserializes the outputs of the remote synapses.</p>
+<dl class="docutils">
+<dt><strong>Inputs</strong>:</dt>
+<dd><ul class="first last simple">
+<li><code class="code docutils literal notranslate"><span class="pre">ctx</span></code> : Object that can be used to stash information for backward computation.</li>
+<li><code class="code docutils literal notranslate"><span class="pre">RemoteSynapse</span> <span class="pre">caller</span></code> : The calling synapse of type <code class="code docutils literal notranslate"><span class="pre">RemoteSynapse</span></code>.</li>
+<li><code class="code docutils literal notranslate"><span class="pre">torch.Tensor</span> <span class="pre">dummy</span></code> : A dummy tensor to trigger autograd in the remote synapse.</li>
+<li><code class="code docutils literal notranslate"><span class="pre">List[</span> <span class="pre">object</span> <span class="pre">]</span> <span class="pre">x</span></code> : A list of objects to be sent through gRPC to the target remote synapses.</li>
+<li><code class="code docutils literal notranslate"><span class="pre">bittensor_pb2.Modality</span> <span class="pre">mode</span></code> : Modality of the data being sent (i.e. Text, Image, etc.)</li>
+</ul>
+</dd>
+<dt><strong>Outputs</strong>:</dt>
+<dd><ul class="first last simple">
+<li>The response of each remote synapse. Given that each minibatch runs through the remote synapse’s local model, the output back
+is a vector output of that remote synapse’s <code class="code docutils literal notranslate"><span class="pre">forward()</span></code> call.</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="backward-ctx-grads">
+<h4><code class="code docutils literal notranslate"><span class="pre">backward</span> <span class="pre">(ctx,</span> <span class="pre">grads)</span></code><a class="headerlink" href="#backward-ctx-grads" title="Permalink to this headline">¶</a></h4>
+<p>The backward function pass computes the gradients of the remote synapse’s outputs to get their partial derivative (that is, the gradients). However,
+at the moment this function does not apply the gradients to the Synapse. Note that if the modality is text, then the derivative would be 0 and thus it returns a
+<code class="code docutils literal notranslate"><span class="pre">none</span></code> tuple. However if the modality is <code class="code docutils literal notranslate"><span class="pre">Image</span></code>, <code class="code docutils literal notranslate"><span class="pre">Tensor</span></code>, or otherwise, then the gradients of the remote synapses are returned.</p>
+<dl class="docutils">
+<dt><strong>Inputs</strong>:</dt>
+<dd><ul class="first last simple">
+<li><code class="code docutils literal notranslate"><span class="pre">ctx</span></code> : Object that can be used to stash information for backward computation.</li>
+<li><code class="code docutils literal notranslate"><span class="pre">torch.Tensor</span> <span class="pre">grads</span></code> : gradients of the local neuron.</li>
+</ul>
+</dd>
+<dt><strong>Outputs</strong>:</dt>
+<dd><ul class="first last simple">
+<li>The response of each remote synapse.</li>
+</ul>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="section" id="metagraph-class">
+<h2><a class="reference external" href="https://github.com/opentensor/bittensor/tree/master/bittensor/metagraph.py">Metagraph</a> class<a class="headerlink" href="#metagraph-class" title="Permalink to this headline">¶</a></h2>
+<p>The Metagraph class is responsible for allowing Neurons to connect to each other and – later – to the blockchain, however this is still under development.</p>
+<div class="section" id="init-self-config">
+<h3><code class="code docutils literal notranslate"><span class="pre">__init__(self,</span> <span class="pre">config)</span></code><a class="headerlink" href="#init-self-config" title="Permalink to this headline">¶</a></h3>
+<p>Initializes a new metagraph proof-of-work object cache, initializes gRPC metagraph servicer, and loads config or default configs.</p>
+</div>
+<div class="section" id="start-self">
+<h3><code class="code docutils literal notranslate"><span class="pre">start</span> <span class="pre">(self)</span></code><a class="headerlink" href="#start-self" title="Permalink to this headline">¶</a></h3>
+<p>Starts two threads:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>The gossip thread that will communicate with and find potential peers on the network. Target method <code class="code docutils literal notranslate"><span class="pre">_update()</span></code>.</li>
+<li>The gRPC server thread.</li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="update-self">
+<h3><code class="code docutils literal notranslate"><span class="pre">update(self)</span></code><a class="headerlink" href="#update-self" title="Permalink to this headline">¶</a></h3>
+<p>This keeps the metagraph record of the local neuron up to date by discovering peers using gossip protocol and removing stale peers.</p>
+</div>
+<div class="section" id="id4">
+<h3><code class="code docutils literal notranslate"><span class="pre">stop</span> <span class="pre">(self)</span></code><a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>Stops the gossip thread. This is typically called at the end of Bittensor’s execution cycle as part of cleanup.</p>
+</div>
+<div class="section" id="do-gossip-self">
+<h3><code class="code docutils literal notranslate"><span class="pre">do_gossip</span> <span class="pre">(self)</span></code><a class="headerlink" href="#do-gossip-self" title="Permalink to this headline">¶</a></h3>
+<p>Sends a gossip query to a random peer and <a class="reference internal" href="#sink"><span class="std std-ref">“sinks”</span></a> their response into the metagraph.</p>
+</div>
+<div class="section" id="do-clean-self-ttl">
+<h3><code class="code docutils literal notranslate"><span class="pre">do_clean</span> <span class="pre">(self,</span> <span class="pre">ttl)</span></code><a class="headerlink" href="#do-clean-self-ttl" title="Permalink to this headline">¶</a></h3>
+<p>Checks whether a peer hasn’t sent a heart beat signal in a given time (i.e. timed out). If it hasn’t, then the neuron deletes it from its list of peers.</p>
+<dl class="docutils">
+<dt><strong>Inputs</strong>:</dt>
+<dd><ul class="first last simple">
+<li><code class="code docutils literal notranslate"><span class="pre">Integer</span> <span class="pre">ttl</span></code>: Time to live for a given target neuron (defaults to 5 minutes).</li>
+</ul>
+</dd>
+<dt><strong>Outputs</strong>:</dt>
+<dd><ul class="first last simple">
+<li><code class="code docutils literal notranslate"><span class="pre">None</span></code></li>
+</ul>
+</dd>
+</dl>
+<blockquote id="sink">
+<div>Records a peer’s gossip request to the local neurons list of synapses and peers, and sets its latest heartbeat time.</div></blockquote>
+</div>
+<div class="section" id="get-peers-self-n">
+<h3><code class="code docutils literal notranslate"><span class="pre">get_peers(self,</span> <span class="pre">n)</span></code><a class="headerlink" href="#get-peers-self-n" title="Permalink to this headline">¶</a></h3>
+<p>Returns the number of active peer endpoints in the network.</p>
+<dl class="docutils">
+<dt><strong>Inputs</strong>:</dt>
+<dd><ul class="first last simple">
+<li><code class="code docutils literal notranslate"><span class="pre">Integer</span> <span class="pre">n</span></code> : maximum number of peers to return. This defaults to 10 peers.</li>
+</ul>
+</dd>
+<dt><strong>Outputs</strong>:</dt>
+<dd><ul class="first last simple">
+<li><code class="code docutils literal notranslate"><span class="pre">None</span></code></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="get-synapses-self-n">
+<h3><code class="code docutils literal notranslate"><span class="pre">get_synapses(self,</span> <span class="pre">n)</span></code><a class="headerlink" href="#get-synapses-self-n" title="Permalink to this headline">¶</a></h3>
+<p>Returns the number of active synapses in the network.</p>
+<dl class="docutils">
+<dt><strong>Inputs</strong>:</dt>
+<dd><ul class="first last simple">
+<li><code class="code docutils literal notranslate"><span class="pre">Integer</span> <span class="pre">n</span></code> : maximum number of synapses to return. This defaults to 1000 synapses.</li>
+</ul>
+</dd>
+<dt><strong>Outputs</strong>:</dt>
+<dd><ul class="first last simple">
+<li><code class="code docutils literal notranslate"><span class="pre">None</span></code></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="getweights-self-synapses">
+<h3><code class="code docutils literal notranslate"><span class="pre">getweights(self,</span> <span class="pre">synapses)</span></code><a class="headerlink" href="#getweights-self-synapses" title="Permalink to this headline">¶</a></h3>
+<p>Retrieves the weights for a list of synapses in the network.</p>
+<dl class="docutils">
+<dt><strong>Inputs</strong>:</dt>
+<dd><ul class="first last simple">
+<li><code class="code docutils literal notranslate"><span class="pre">List[bittensor_pb2.Synapse]</span> <span class="pre">synapses</span></code> : List of remote synapse endpoints.</li>
+</ul>
+</dd>
+<dt><strong>Outputs</strong>:</dt>
+<dd><ul class="first last simple">
+<li><code class="code docutils literal notranslate"><span class="pre">List(Float)</span> <span class="pre">results</span></code> : List of remote synapse weights.</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="setweights-self-synapses">
+<h3><code class="code docutils literal notranslate"><span class="pre">setweights(self,</span> <span class="pre">synapses)</span></code><a class="headerlink" href="#setweights-self-synapses" title="Permalink to this headline">¶</a></h3>
+<p>Sets the weights for a list of synapses in the network.</p>
+<dl class="docutils">
+<dt><strong>Inputs</strong>:</dt>
+<dd><ul class="first last simple">
+<li><code class="code docutils literal notranslate"><span class="pre">List[bittensor_pb2.Synapse]</span> <span class="pre">synapses</span></code> : List of remote synapse endpoints.</li>
+<li><code class="code docutils literal notranslate"><span class="pre">torch.Tensor</span> <span class="pre">weights</span></code> : Weights to set to each synapse.</li>
+</ul>
+</dd>
+<dt><strong>Outputs</strong>:</dt>
+<dd><ul class="first last simple">
+<li><code class="code docutils literal notranslate"><span class="pre">None</span></code></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="subscribe-self-synapse">
+<h3><code class="code docutils literal notranslate"><span class="pre">subscribe(self,</span> <span class="pre">synapse)</span></code><a class="headerlink" href="#subscribe-self-synapse" title="Permalink to this headline">¶</a></h3>
+<p>Subscribes a synapse class object to the neuron’s metagraph.</p>
+<dl class="docutils">
+<dt><strong>Inputs</strong>:</dt>
+<dd><ul class="first last simple">
+<li><code class="code docutils literal notranslate"><span class="pre">bittensor_pb2.Synapse</span> <span class="pre">synapses</span></code> : Synapse to subscribe to metagraph.</li>
+</ul>
+</dd>
+<dt><strong>Outputs</strong>:</dt>
+<dd><ul class="first last simple">
+<li><code class="code docutils literal notranslate"><span class="pre">None</span></code></li>
+</ul>
+</dd>
+</dl>
 </div>
 </div>
 </div>

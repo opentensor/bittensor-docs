@@ -26,6 +26,8 @@ this is a highly simplified explanation, and biological neurons are significantl
 
     Biological neuron cell. Credit: David Baillot/ UC San Diego.
 
+.. _bittensor-network:
+
 The Bittensor Network
 ------------------------
 
