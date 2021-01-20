@@ -4,7 +4,6 @@
 # https://github.com/readthedocs/readthedocs.org/blob/master/requirements/pip.txt
 # https://github.com/readthedocs/readthedocs.org/blob/master/requirements/local-docs-build.txt
 sphinx
-sphinx_rtd_theme
 graphviz
 furo
 
