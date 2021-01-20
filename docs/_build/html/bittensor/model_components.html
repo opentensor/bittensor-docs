@@ -164,18 +164,16 @@
 <code class="sig-name descname">local_forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">images</span><span class="p">:</span> <span class="n">torch.Tensor</span></em>, <em class="sig-param"><span class="n">targets</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>torch.Tensor<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> → types.SimpleNamespace<a class="headerlink" href="#bittensor.synapses.ffnn.FFNNSynapse.local_forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Forward pass non-sequential image inputs and targets through the FFNN Synapse. The call does not make
 remote queries to the network and returns only local hidden, target and losses.</p>
-<blockquote>
-<div><dl class="simple">
-<dt>Args:</dt><dd><dl class="simple">
-<dt>images (<code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.FloatTensor</span></code> of shape <code class="xref py py-obj docutils literal notranslate"><span class="pre">(batch_size,</span> <span class="pre">channels,</span> <span class="pre">rows,</span> <span class="pre">cols)</span></code>, <cite>required</cite>):</dt><dd><p>PIL.toTensor() encoded images.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>images</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.FloatTensor</span></code> of shape <code class="xref py py-obj docutils literal notranslate"><span class="pre">(batch_size,</span> <span class="pre">channels,</span> <span class="pre">rows,</span> <span class="pre">cols)</span></code>, <cite>required</cite>) – PIL.toTensor() encoded images.</p></li>
+<li><p><strong>targets</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.FloatTensor</span></code>  of shape <code class="xref py py-obj docutils literal notranslate"><span class="pre">(batch_size,</span> <span class="pre">target_dim)</span></code>, <cite>optional</cite>, defaults to None) – Image labels.</p></li>
+</ul>
 </dd>
-<dt>targets (<code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.FloatTensor</span></code>  of shape <code class="xref py py-obj docutils literal notranslate"><span class="pre">(batch_size,</span> <span class="pre">target_dim)</span></code>, <cite>optional</cite>, defaults to None):</dt><dd><p>Image labels.</p>
-</dd>
-</dl>
-</dd>
-<dt>Returns:</dt><dd><dl class="simple">
-<dt>local_context (<code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.FloatTensor</span></code> of shape <code class="xref py py-obj docutils literal notranslate"><span class="pre">(batch_size,</span> <span class="pre">bittensor.__network_dim__)</span></code>, <cite>required</cite>):</dt><dd><p>Pre-Hidden layer context, trained to match the remote context.</p>
-</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>Pre-Hidden layer context, trained to match the remote context.</p>
+<dl class="simple">
 <dt>local_hidden (<code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.FloatTensor</span></code> of shape <code class="xref py py-obj docutils literal notranslate"><span class="pre">(batch_size,</span> <span class="pre">bittensor.__network_dim__)</span></code>, <cite>required</cite>):</dt><dd><p>Hidden layer produced from the context.</p>
 </dd>
 <dt>local_target (<code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.FloatTensor</span></code> of shape <code class="xref py py-obj docutils literal notranslate"><span class="pre">(batch_size,</span> <span class="pre">target_dim)</span></code>, <cite>optional</cite>):</dt><dd><p>FFNN Target predictions using local_context.</p>
@@ -185,9 +183,12 @@ remote queries to the network and returns only local hidden, target and losses.<
 <dt>local_accuracy (<code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.FloatTensor</span></code> of shape <code class="xref py py-obj docutils literal notranslate"><span class="pre">(1)</span></code>, <cite>optional</cite>):</dt><dd><p>Accuracy of target predictions.</p>
 </dd>
 </dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>local_context (<code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.FloatTensor</span></code> of shape <code class="xref py py-obj docutils literal notranslate"><span class="pre">(batch_size,</span> <span class="pre">bittensor.__network_dim__)</span></code>, <cite>required</cite>)</p>
 </dd>
 </dl>
-</div></blockquote>
 </dd></dl>
 <dl class="py method">
 <dt id="bittensor.synapses.ffnn.FFNNSynapse.remote_forward">

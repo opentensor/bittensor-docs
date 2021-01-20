@@ -1,1 +1,1 @@
-# Bittensor Documentation
+# Bittensor

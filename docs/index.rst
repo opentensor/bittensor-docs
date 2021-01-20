@@ -1,4 +1,4 @@
-.. Bittensor Documentation documentation master file, created by
+.. Bittensor documentation master file, created by
    sphinx-quickstart on Thu Oct 1 15:20:19 2020.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
@@ -71,6 +71,7 @@ References
 .. [2] “AI Index Report”, Stanford University HAL, 2019.
 .. [3] "The bitcoin network is now more powerful than the top 500 supercomputers, combined", Christopher Mims, https://qz.com/84056/the-bitcoin-network-is-now-more-powerful-than-the-top-500-supercomputers-combined/, Dec 2020. 
 
+.. rubric:: Bittensor Documentation
 .. toctree::
    :maxdepth: 2
    :hidden:
