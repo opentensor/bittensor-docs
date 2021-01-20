@@ -1,0 +1,286 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Configuration" href="configuration.html" /><link rel="prev" title="Installation" href="getting_started.html" />
+
+    <meta name="generator" content="sphinx-3.4.3, furo 2020.12.30.beta24"/>
+        <title>Hello, Machines! - Bittensor 1 documentation</title>
+      <link rel="stylesheet" href="../_static/styles/furo.css?digest=33d2fc4f3f180ec1ffc6524e273e21d7d58cbe49">
+    <link rel="stylesheet" href="../_static/pygments.css">
+    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css">
+    
+
+
+<style>
+  :root {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+  }
+
+  /* For allowing end-user-specific overrides */
+  .override-light {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  .override-dark {
+    --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+  }
+</style><link rel="stylesheet" href="../_static/styles/furo-extensions.css?digest=26485485040e7aaf717c13fd0188a5ad2c2deb60">
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script defer="defer" src="../_static/jquery.js"></script>
+    <script defer="defer" src="../_static/underscore.js"></script>
+    <script defer="defer" src="../_static/doctools.js"></script>
+    <script defer src="../_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></head>
+  <body dir="">
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z"/>
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="10" y1="12" x2="20" y2="12" />
+      <line x1="6" y1="18" x2="20" y2="18" />
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">Bittensor 1 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">Bittensor 1 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html">
+  <input class="sidebar-search" placeholder=Search name="q">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Installation</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Hello, Machines!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Bittensor</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../bittensor/model_components.html">Components of a Bittensor Model</a></li>
+</ul>
+
+</div>
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <main class="main">
+    <div class="content">
+      <article role="main">
+        <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        </label>
+        <div class="section" id="hello-machines">
+<h1>Hello, Machines!<a class="headerlink" href="#hello-machines" title="Permalink to this headline">¶</a></h1>
+<p>With Bittensor installed, let’s try running one of the examples! Each example is basically driver code for the models you build inside <a class="reference external" href="https://github.com/opentensor/bittensor/tree/master/bittensor/synapses">bittensor/synapses</a>. This will give you an overview to the development flow of Bittensor as well as what to expect when creating new models.</p>
+<p>For this example, we will be running <code class="docutils literal notranslate"><span class="pre">examples/gpt2-wiki.py</span></code> which is exactly what it sounds like: a very small version of <a class="reference external" href="https://huggingface.co/transformers/model_doc/gpt2.html">HuggingFace OpenAI GPT2</a>.</p>
+<p>Each example is powered by a <a class="reference external" href="https://github.com/opentensor/bittensor/tree/master/bittensor/synapses"><code class="docutils literal notranslate"><span class="pre">Synapse</span></code></a>. Synapses are where you would be building and setting up your PyTorch model. We will cover Synapses later in this documentation. Within each example, there is a class <code class="docutils literal notranslate"><span class="pre">Session()</span></code> that is responsible for training, testing, and setting up your model. <em>This is an optional naming and development convention and is not required for the functionality of Bittensor.</em></p>
+<div class="section" id="training-flow">
+<h2>Training flow<a class="headerlink" href="#training-flow" title="Permalink to this headline">¶</a></h2>
+<p>The general training flow in the Bittensor network can be summarized as follows, all examples follow the same flow:</p>
+<ol>
+<li><p>Initialize your model with one you created in <a class="reference external" href="https://github.com/opentensor/bittensor/tree/master/bittensor/synapses"><code class="docutils literal notranslate"><span class="pre">Synapse</span></code></a>.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">GPT2LMSynapse</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Set up your optimizer, scheduler, and dataset.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">learning_rate</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">momentum</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">scheduler</span> <span class="o">=</span> <span class="n">WarmupCosineWithHardRestartsSchedule</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">dataset</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s1">'ag_news'</span><span class="p">)[</span><span class="s1">'train'</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">self.config</span></code> is generated from the command line arguments or an optional <code class="docutils literal notranslate"><span class="pre">configuration.yaml</span></code>. In this example, we simply load a pre-loaded dataset from the <code class="docutils literal notranslate"><span class="pre">datasets</span></code> library called <a class="reference external" href="https://huggingface.co/datasets/ag_news">ag_news</a>. This is a small dataset that can be run on any machine without eating up the memory with batches.</p>
+</li>
+<li><p>Set up your device where your model will run.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">"cuda"</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">"cpu"</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Start a <a class="reference external" href="https://github.com/opentensor/bittensor/blob/master/bittensor/neuron.py">Neuron</a> session. Neurons allow you to start communicating with nodes in the bittensor network.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">neuron</span><span class="p">:</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<blockquote>
+<div><p>Each neuron has an <a class="reference external" href="https://github.com/opentensor/bittensor/blob/master/bittensor/axon.py">Axon</a> terminal that serves a grpc endpoint which provides access to other synapses on other nodes. Each neuron also has a <a class="reference external" href="https://github.com/opentensor/bittensor/blob/master/bittensor/dendrite.py">Dendrite</a> which is a differentiable object used to make calls to the network.</p>
+</div></blockquote>
+<ol>
+<li><p>Now is when you define your training epoch loop. In the examples, we simply train forever using <code class="docutils literal notranslate"><span class="pre">while</span> <span class="pre">True:</span></code> but you can define it to be any number of epochs you wish to use. The first thing we do in this loop is we serve the model on the Axon. This is because after each loop we update our model and so we always want to serve the latest version of our model.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">neuron</span><span class="o">.</span><span class="n">axon</span><span class="o">.</span><span class="n">serve</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>The fun part starts here, though very straightforward. We can now start training our model. After obtaining the inputs and possibly targets for the current batch, we can just call our model:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span>    <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">remote_forward</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">neuron</span><span class="p">,</span>
+            <span class="n">inputs</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">device</span><span class="p">),</span>
+            <span class="n">training</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+<p>We call the synapse model’s <code class="docutils literal notranslate"><span class="pre">remote_forward</span></code> call as it will run a local forward call and send the present batch of inputs to experts on the network for processing as well. Once the experts have made their own forward call, they will respond with their outputs back to us. The remote expert’s output is then used as input into our model.</p>
+<blockquote>
+<div><p>We now have 3 training losses:</p>
+<ul class="simple">
+<li><p><strong>local_target_loss</strong>: The loss of our local model with respect to the local target inputs.</p></li>
+<li><p><strong>remote_target_loss</strong>: The loss of the remote models.</p></li>
+<li><p><strong>distillation_loss</strong>: The loss of the <a class="reference external" href="https://arxiv.org/abs/1503.02531">distilled</a> version of the model deployed on the &gt;network. This model is the one we can download from the network and use in production.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>We can sum all our losses now and run a backwards call to accumulate the gradients on the model, then apply them and zero our gradients again.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span>     <span class="n">loss</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">local_target_loss</span> <span class="o">+</span> <span class="n">output</span><span class="o">.</span><span class="n">distillation_loss</span> <span class="o">+</span> <span class="n">output</span><span class="o">.</span><span class="n">remote_target_loss</span>
+     <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span> <span class="c1"># Accumulates gradients on the model.</span>
+     <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span> <span class="c1"># Applies accumulated gradients.</span>
+     <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span> <span class="c1"># Zeros out gradients for next accummulation</span>
+</pre></div>
+</div>
+</li>
+<li><p>Finally, we have to train our row weights. This is so that we can emit these weights to the network and update our list of experts that we communicate with.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span>        <span class="n">batch_weights</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">dendrite</span><span class="o">.</span><span class="n">weights</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">row</span> <span class="o">=</span> <span class="mf">0.97</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">row</span> <span class="o">+</span> <span class="mf">0.03</span> <span class="o">*</span> <span class="n">batch_weights</span> <span class="c1"># Moving avg update.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">row</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">row</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dim</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="c1"># Ensure normalization.</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p><strong>And that’s it! You can peruse through any of the examples and see how we are applying all these steps to create models that run forever and trade information with other models.</strong></p>
+</div>
+</div>
+
+      </article>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="configuration.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Configuration</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="getting_started.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Installation</div>
+                
+              </div>
+            </a>
+        </div>
+
+        <div class="related-information">
+              Copyright &#169; 2020, Ala Shaabana, Jacob Steeves, Daniel Attevelt, the Bittensor community
+            |
+            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
+              and
+              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+              <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+            |
+            <a class="muted-link" href="../_sources/getting-started/hello_world.md.txt"
+               rel="nofollow">
+              Show Source
+            </a>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Hello, Machines!</a><ul>
+<li><a class="reference internal" href="#training-flow">Training flow</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </main>
+</div>
+  </body>
+</html>

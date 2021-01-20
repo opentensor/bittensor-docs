@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 #
 import os
-# import sys
-# sys.path.insert(0, os.path.abspath('.'))
+import sys
+sys.path.insert(0, os.path.abspath('../../bittensor'))
 
 
 # -- Project information -----------------------------------------------------
 project = 'Bittensor'
-copyright = '2020, Ala Shaabana, Jacob Steeves, and the Bittensor community'
-author = 'Ala Shaabana, Jacob Steeves, and the Bittensor community'
+copyright = '2020, Ala Shaabana, Jacob Steeves, Daniel Attevelt, the Bittensor community'
+author = 'Ala Shaabana, Jacob Steeves, Daniel Attevelt, and the Bittensor community'
 
 # The short X.Y version
 version = ''
@@ -28,8 +28,11 @@ release = '1'
 extensions = [
     'sphinx.ext.todo',
     'sphinx.ext.githubpages',
-    'sphinx_rtd_theme',
     'sphinx.ext.autosectionlabel',
+    'furo',
+    'sphinx.ext.autodoc',
+    'sphinx.ext.coverage',
+    'sphinx.ext.napoleon',
     'recommonmark'
 ]
 
@@ -39,8 +42,8 @@ templates_path = ['_templates']
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
 #
-# source_suffix = ['.rst', '.md']
-source_suffix = '.rst'
+source_suffix = ['.rst', '.md']
+#source_suffix = {'.md': 'markdown'}
 
 # The master toctree document.
 master_doc = 'index'
@@ -86,8 +89,7 @@ html_static_path = ['_static']
 # default: ``['localtoc.html', 'relations.html', 'sourcelink.html',
 # 'searchbox.html']``.
 #
-# html_sidebars = {}
-html_theme = 'sphinx_rtd_theme'
+html_theme = "furo"
 html_context = {
   "display_github": True,
   "github_user": "crate",
